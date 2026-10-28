@@ -61,71 +61,58 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
 
   const normalizedQuery = query.toLowerCase().trim();
 
-  // Search in Guidelines
   const matchedGuidelines = useMemo(() => {
     if (!normalizedQuery) return [];
     return CLINICAL_GUIDELINES_DATA.filter(g => 
       g.title.toLowerCase().includes(normalizedQuery) ||
-      g.shortTitle.toLowerCase().includes(normalizedQuery) ||
+      g.shortTitle?.toLowerCase().includes(normalizedQuery) ||
       g.category.toLowerCase().includes(normalizedQuery) ||
       g.sourceReference.toLowerCase().includes(normalizedQuery) ||
-      g.executiveSummary.toLowerCase().includes(normalizedQuery) ||
-      g.corePrinciples.some(p => p.toLowerCase().includes(normalizedQuery)) ||
-      g.algorithmSteps.some(s => 
-        s.stepTitle.toLowerCase().includes(normalizedQuery) ||
-        s.recommendation.toLowerCase().includes(normalizedQuery) ||
-        s.options.some(o => o.name.toLowerCase().includes(normalizedQuery) || o.clinicalNote.toLowerCase().includes(normalizedQuery))
-      )
-    ).slice(0, 4);
+      g.executiveSummary.toLowerCase().includes(normalizedQuery)
+    ).slice(0, 5);
   }, [normalizedQuery]);
 
-  // Search in Disorders
   const matchedDisorders = useMemo(() => {
     if (!normalizedQuery) return [];
     return DISORDERS_DATA.filter(d => 
       d.name.toLowerCase().includes(normalizedQuery) ||
-      d.dsmCode.toLowerCase().includes(normalizedQuery) ||
       d.category.toLowerCase().includes(normalizedQuery) ||
-      d.summary.toLowerCase().includes(normalizedQuery) ||
-      d.coreCriteria.some(c => c.toLowerCase().includes(normalizedQuery)) ||
-      d.differentialDiagnosis.some(diff => diff.condition.toLowerCase().includes(normalizedQuery) || diff.distinguishingFeatures.toLowerCase().includes(normalizedQuery))
-    ).slice(0, 4);
+      d.dsmCode.toLowerCase().includes(normalizedQuery) ||
+      d.summary.toLowerCase().includes(normalizedQuery)
+    ).slice(0, 5);
   }, [normalizedQuery]);
 
-  // Search in Interactions
   const matchedInteractions = useMemo(() => {
     if (!normalizedQuery) return [];
     return DRUG_INTERACTIONS_DATA.filter(i => 
+      i.title.toLowerCase().includes(normalizedQuery) ||
       i.drugA.toLowerCase().includes(normalizedQuery) ||
       i.drugB.toLowerCase().includes(normalizedQuery) ||
-      i.title.toLowerCase().includes(normalizedQuery) ||
-      i.mechanism.toLowerCase().includes(normalizedQuery) ||
       i.clinicalRisk.toLowerCase().includes(normalizedQuery) ||
-      i.management.toLowerCase().includes(normalizedQuery)
+      i.mechanism.toLowerCase().includes(normalizedQuery)
     ).slice(0, 4);
   }, [normalizedQuery]);
 
-  // Search in MSE
   const matchedMseTerms = useMemo(() => {
     if (!normalizedQuery) return [];
-    const list: { term: string; groupTitle: string; definition: string }[] = [];
-    MSE_DATA.forEach(group => {
-      group.options.forEach(opt => {
+    const results: { term: string; definition: string; groupTitle: string }[] = [];
+    MSE_DATA.forEach(g => {
+      g.options.forEach(item => {
         if (
-          opt.term.toLowerCase().includes(normalizedQuery) || 
-          opt.definition.toLowerCase().includes(normalizedQuery) ||
-          group.title.toLowerCase().includes(normalizedQuery)
+          item.term.toLowerCase().includes(normalizedQuery) ||
+          item.definition.toLowerCase().includes(normalizedQuery)
         ) {
-          if (list.length < 4) {
-            list.push({ term: opt.term, groupTitle: group.title, definition: opt.definition });
-          }
+          results.push({
+            term: item.term,
+            definition: item.definition,
+            groupTitle: g.title
+          });
         }
       });
     });
-    return list;
+    return results.slice(0, 4);
   }, [normalizedQuery]);
 
-  // Search in Scales
   const matchedScales = useMemo(() => {
     if (!normalizedQuery) return [];
     return SCALES_DATA.filter(s =>
@@ -145,37 +132,37 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-start justify-center pt-12 sm:pt-20 px-4 animate-in fade-in duration-150">
-      <div className="w-full max-w-2xl bg-[#0d0d0d] shadow-2xl border border-neutral-800 overflow-hidden text-white flex flex-col max-h-[85vh]">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/40 backdrop-blur-xs flex items-start justify-center pt-12 sm:pt-20 px-4 animate-in fade-in duration-150">
+      <div className="w-full max-w-2xl bg-white shadow-2xl border border-neutral-200 overflow-hidden text-neutral-900 flex flex-col max-h-[85vh] rounded-xl">
         {/* Search Input Bar */}
-        <div className="p-4 border-b border-neutral-800 bg-black flex items-center gap-3">
-          <Search className="w-5 h-5 text-red-500 shrink-0" />
+        <div className="p-4 border-b border-neutral-200 bg-white flex items-center gap-3">
+          <Search className="w-5 h-5 text-neutral-700 shrink-0" />
           <input
             ref={inputRef}
             type="text"
             placeholder="Kılavuz, ilaç etkileşimi, semptom veya muayene terimi ara (örn. Lityum, Mani, Klonus, Yıkama süresi)..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 bg-transparent border-none text-white placeholder-neutral-500 text-sm sm:text-base focus:outline-none"
+            className="flex-1 bg-transparent border-none text-neutral-900 placeholder-neutral-400 text-sm sm:text-base focus:outline-none font-sans"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery('')}
-              className="p-1 text-neutral-500 hover:text-white"
+              className="p-1 text-neutral-400 hover:text-black cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
           )}
-          <kbd className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono text-neutral-400 bg-neutral-900 border border-neutral-700">
+          <kbd className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono text-neutral-600 bg-neutral-100 border border-neutral-200 rounded">
             ESC
           </kbd>
         </div>
 
         {/* Category Filters Bar */}
-        <div className="px-4 py-2 border-b border-neutral-800 bg-[#111111] flex items-center gap-1.5 overflow-x-auto scrollbar-none">
-          <span className="text-[11px] font-mono uppercase text-neutral-500 mr-1 flex items-center gap-1">
-            <Filter className="w-3 h-3" />
+        <div className="px-4 py-2.5 border-b border-neutral-200 bg-[#f5f5f7] flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+          <span className="text-[11px] font-mono uppercase text-neutral-500 mr-1 flex items-center gap-1 font-semibold">
+            <Filter className="w-3 h-3 text-neutral-700" />
             <span>Filtre:</span>
           </span>
           {[
@@ -190,10 +177,10 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
               key={cat.id}
               type="button"
               onClick={() => setSelectedCategory(cat.id as SearchCategory)}
-              className={`px-2.5 py-1 text-[11px] font-bold transition-colors whitespace-nowrap cursor-pointer border ${
+              className={`px-3 py-1 text-[11px] font-semibold transition-all whitespace-nowrap cursor-pointer rounded-md border ${
                 selectedCategory === cat.id
-                  ? 'bg-red-600 border-red-500 text-white'
-                  : 'bg-black text-neutral-400 hover:text-white border-neutral-800'
+                  ? 'bg-black border-black text-white shadow-xs'
+                  : 'bg-white text-neutral-600 hover:text-black border-neutral-200 hover:border-neutral-300'
               }`}
             >
               {cat.label}
@@ -205,10 +192,10 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
         <div className="flex-1 overflow-y-auto p-4 space-y-5">
           {!query ? (
             <div className="py-10 text-center space-y-3">
-              <div className="w-10 h-10 bg-red-950/60 border border-red-800 text-red-500 flex items-center justify-center mx-auto">
-                <Sparkles className="w-5 h-5" />
+              <div className="w-10 h-10 bg-neutral-100 border border-neutral-300 text-neutral-900 flex items-center justify-center mx-auto transform rotate-45 shadow-xs">
+                <Sparkles className="w-5 h-5 transform -rotate-45" />
               </div>
-              <p className="text-xs sm:text-sm font-semibold text-neutral-200">
+              <p className="text-xs sm:text-sm font-bold text-neutral-900 font-display">
                 Gelişmiş Akademik Psikiyatri Arama Portalı
               </p>
               <p className="text-xs text-neutral-500 max-w-sm mx-auto">
@@ -220,7 +207,7 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
                     key={tag}
                     type="button"
                     onClick={() => setQuery(tag)}
-                    className="text-[11px] px-2 py-1 bg-black hover:bg-neutral-900 text-neutral-400 hover:text-red-400 border border-neutral-800 transition-colors cursor-pointer"
+                    className="text-[11px] px-2.5 py-1 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 hover:text-black border border-neutral-200 transition-all cursor-pointer rounded-md"
                   >
                     {tag}
                   </button>
@@ -236,7 +223,7 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
               {/* Guidelines Results */}
               {(selectedCategory === 'all' || selectedCategory === 'guidelines') && matchedGuidelines.length > 0 && (
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs font-mono font-bold text-red-500 uppercase tracking-wider">
+                  <div className="flex items-center justify-between text-xs font-mono font-bold text-neutral-900 uppercase tracking-wider">
                     <span className="flex items-center gap-1.5">
                       <Compass className="w-3.5 h-3.5" />
                       <span>Klinik Tedavi Kılavuzları & Algoritmalar ({matchedGuidelines.length})</span>
@@ -248,25 +235,25 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
                         key={g.id}
                         type="button"
                         onClick={() => {
-                          onNavigate('guidelines', g.id);
+                          onNavigate('treatments', g.id);
                           onClose();
                         }}
-                        className="w-full text-left p-3 border border-neutral-800 bg-[#121212] hover:border-red-600 transition-all cursor-pointer flex items-center justify-between group"
+                        className="w-full text-left p-3 border border-neutral-200 bg-neutral-50 hover:border-neutral-400 hover:bg-white transition-all cursor-pointer flex items-center justify-between group rounded-lg shadow-xs"
                       >
                         <div className="flex-1 min-w-0 pr-2">
                           <div className="flex items-center gap-2">
-                            <span className="text-xs sm:text-sm font-bold text-white group-hover:text-red-400">
+                            <span className="text-xs sm:text-sm font-bold text-neutral-900 group-hover:text-black font-display">
                               {g.title}
                             </span>
-                            <span className="text-[10px] px-1.5 py-0.5 bg-red-950 text-red-400 border border-red-800 font-mono">
+                            <span className="text-[10px] px-1.5 py-0.5 bg-white text-neutral-700 border border-neutral-200 font-mono rounded">
                               {g.sourceReference}
                             </span>
                           </div>
-                          <p className="text-[11px] text-neutral-400 line-clamp-1 mt-0.5">
+                          <p className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5">
                             {g.executiveSummary}
                           </p>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-red-500 shrink-0" />
+                        <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-black shrink-0" />
                       </button>
                     ))}
                   </div>
@@ -276,9 +263,9 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
               {/* Disorders Results */}
               {(selectedCategory === 'all' || selectedCategory === 'disorders') && matchedDisorders.length > 0 && (
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider">
+                  <div className="flex items-center justify-between text-xs font-mono font-bold text-neutral-900 uppercase tracking-wider">
                     <span className="flex items-center gap-1.5">
-                      <BookOpen className="w-3.5 h-3.5 text-red-500" />
+                      <BookOpen className="w-3.5 h-3.5 text-neutral-800" />
                       <span>DSM-5-TR Tanı Ölçütleri ({matchedDisorders.length})</span>
                     </span>
                   </div>
@@ -291,22 +278,22 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
                           onNavigate('disorders', d.id);
                           onClose();
                         }}
-                        className="w-full text-left p-3 border border-neutral-800 bg-[#121212] hover:border-red-600 transition-all cursor-pointer flex items-center justify-between group"
+                        className="w-full text-left p-3 border border-neutral-200 bg-neutral-50 hover:border-neutral-400 hover:bg-white transition-all cursor-pointer flex items-center justify-between group rounded-lg shadow-xs"
                       >
                         <div className="flex-1 min-w-0 pr-2">
                           <div className="flex items-center gap-2">
-                            <span className="text-xs sm:text-sm font-bold text-white group-hover:text-red-400">
+                            <span className="text-xs sm:text-sm font-bold text-neutral-900 group-hover:text-black font-display">
                               {d.name}
                             </span>
-                            <span className="text-[10px] px-1.5 py-0.5 bg-neutral-900 text-neutral-300 border border-neutral-700 font-mono">
+                            <span className="text-[10px] px-1.5 py-0.5 bg-white text-neutral-700 border border-neutral-200 font-mono rounded">
                               {d.dsmCode}
                             </span>
                           </div>
-                          <p className="text-[11px] text-neutral-400 line-clamp-1 mt-0.5">
+                          <p className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5">
                             {d.summary}
                           </p>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-red-500 shrink-0" />
+                        <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-black shrink-0" />
                       </button>
                     ))}
                   </div>
@@ -316,9 +303,9 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
               {/* Interactions Results */}
               {(selectedCategory === 'all' || selectedCategory === 'interactions') && matchedInteractions.length > 0 && (
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs font-mono font-bold text-red-400 uppercase tracking-wider">
+                  <div className="flex items-center justify-between text-xs font-mono font-bold text-neutral-900 uppercase tracking-wider">
                     <span className="flex items-center gap-1.5">
-                      <AlertTriangle className="w-3.5 h-3.5" />
+                      <AlertTriangle className="w-3.5 h-3.5 text-red-600" />
                       <span>İlaç Etkileşimleri & Toksisite ({matchedInteractions.length})</span>
                     </span>
                   </div>
@@ -328,29 +315,29 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
                         key={idx}
                         type="button"
                         onClick={() => {
-                          onNavigate('interactions');
+                          onNavigate('tables');
                           onClose();
                         }}
-                        className="w-full text-left p-3 border border-neutral-800 bg-[#121212] hover:border-red-600 transition-all cursor-pointer flex items-center justify-between group"
+                        className="w-full text-left p-3 border border-neutral-200 bg-neutral-50 hover:border-neutral-400 hover:bg-white transition-all cursor-pointer flex items-center justify-between group rounded-lg shadow-xs"
                       >
                         <div className="flex-1 min-w-0 pr-2">
                           <div className="flex items-center gap-2">
-                            <span className="text-xs sm:text-sm font-bold text-white group-hover:text-red-400">
+                            <span className="text-xs sm:text-sm font-bold text-neutral-900 group-hover:text-black font-display">
                               {item.title}
                             </span>
-                            <span className={`text-[10px] px-1.5 py-0.5 font-mono font-bold ${
+                            <span className={`text-[10px] px-1.5 py-0.5 font-mono font-bold rounded ${
                               item.severity === 'contraindicated' 
-                                ? 'bg-red-950 text-red-300 border border-red-800' 
-                                : 'bg-red-900/40 text-red-300 border border-red-700'
+                                ? 'bg-red-600 text-white font-bold' 
+                                : 'bg-neutral-200 text-neutral-800'
                             }`}>
                               {item.severity === 'contraindicated' ? 'KONTRENDİKE' : 'MAJÖR RİSK'}
                             </span>
                           </div>
-                          <p className="text-[11px] text-neutral-400 line-clamp-1 mt-0.5">
+                          <p className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5">
                             {item.drugA} + {item.drugB}
                           </p>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-red-500 shrink-0" />
+                        <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-black shrink-0" />
                       </button>
                     ))}
                   </div>
@@ -360,9 +347,9 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
               {/* MSE Results */}
               {(selectedCategory === 'all' || selectedCategory === 'mse') && matchedMseTerms.length > 0 && (
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs font-mono font-bold text-neutral-300 uppercase tracking-wider">
+                  <div className="flex items-center justify-between text-xs font-mono font-bold text-neutral-900 uppercase tracking-wider">
                     <span className="flex items-center gap-1.5">
-                      <ClipboardCheck className="w-3.5 h-3.5 text-red-500" />
+                      <ClipboardCheck className="w-3.5 h-3.5 text-neutral-800" />
                       <span>Ruhsal Durum Muayenesi (MSE) Terimleri ({matchedMseTerms.length})</span>
                     </span>
                   </div>
@@ -372,25 +359,25 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
                         key={idx}
                         type="button"
                         onClick={() => {
-                          onNavigate('mse');
+                          onNavigate('assessment');
                           onClose();
                         }}
-                        className="w-full text-left p-3 border border-neutral-800 bg-[#121212] hover:border-red-600 transition-all cursor-pointer flex items-center justify-between group"
+                        className="w-full text-left p-3 border border-neutral-200 bg-neutral-50 hover:border-neutral-400 hover:bg-white transition-all cursor-pointer flex items-center justify-between group rounded-lg shadow-xs"
                       >
                         <div className="flex-1 min-w-0 pr-2">
                           <div className="flex items-center gap-2">
-                            <span className="text-xs sm:text-sm font-bold text-white group-hover:text-red-400">
+                            <span className="text-xs sm:text-sm font-bold text-neutral-900 group-hover:text-black font-display">
                               {m.term}
                             </span>
-                            <span className="text-[10px] px-1.5 py-0.5 bg-black text-neutral-400 border border-neutral-800">
+                            <span className="text-[10px] px-1.5 py-0.5 bg-white text-neutral-600 border border-neutral-200 font-mono rounded">
                               {m.groupTitle}
                             </span>
                           </div>
-                          <p className="text-[11px] text-neutral-400 line-clamp-1 mt-0.5">
+                          <p className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5">
                             {m.definition}
                           </p>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-red-500 shrink-0" />
+                        <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-black shrink-0" />
                       </button>
                     ))}
                   </div>
@@ -400,9 +387,9 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
               {/* Scales Results */}
               {(selectedCategory === 'all' || selectedCategory === 'scales') && matchedScales.length > 0 && (
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs font-mono font-bold text-neutral-300 uppercase tracking-wider">
+                  <div className="flex items-center justify-between text-xs font-mono font-bold text-neutral-900 uppercase tracking-wider">
                     <span className="flex items-center gap-1.5">
-                      <Calculator className="w-3.5 h-3.5 text-red-500" />
+                      <Calculator className="w-3.5 h-3.5 text-neutral-800" />
                       <span>Klinik Psikiyatri Ölçekleri ({matchedScales.length})</span>
                     </span>
                   </div>
@@ -415,22 +402,22 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
                           onNavigate('scales', s.id);
                           onClose();
                         }}
-                        className="w-full text-left p-3 border border-neutral-800 bg-[#121212] hover:border-red-600 transition-all cursor-pointer flex items-center justify-between group"
+                        className="w-full text-left p-3 border border-neutral-200 bg-neutral-50 hover:border-neutral-400 hover:bg-white transition-all cursor-pointer flex items-center justify-between group rounded-lg shadow-xs"
                       >
                         <div className="flex-1 min-w-0 pr-2">
                           <div className="flex items-center gap-2">
-                            <span className="text-xs sm:text-sm font-bold text-white group-hover:text-red-400">
+                            <span className="text-xs sm:text-sm font-bold text-neutral-900 group-hover:text-black font-display">
                               {s.name}
                             </span>
-                            <span className="text-[10px] px-1.5 py-0.5 bg-red-950 text-red-400 border border-red-800 font-mono">
+                            <span className="text-[10px] px-1.5 py-0.5 bg-white text-neutral-700 border border-neutral-200 font-mono rounded">
                               {s.code}
                             </span>
                           </div>
-                          <p className="text-[11px] text-neutral-400 line-clamp-1 mt-0.5">
+                          <p className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5">
                             {s.targetCondition}
                           </p>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-red-500 shrink-0" />
+                        <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-black shrink-0" />
                       </button>
                     ))}
                   </div>

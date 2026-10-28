@@ -1,1 +1,254 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", -system-ui, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", -system-ui, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+@layer base {
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", -system-ui, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", -system-ui, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "SF Mono", SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  }
+
+  *, ::before, ::after {
+    font-family: var(--font-sans);
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: #ffffff;
+    color: #1d1d1f;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  html.dark {
+    background-color: #0b0c0e;
+    color: #f1f3f5;
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #ffffff;
+    color: #1d1d1f;
+    overflow-x: hidden;
+    letter-spacing: -0.014em;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html.dark body {
+    background-color: #0b0c0e;
+    color: #f1f3f5;
+  }
+
+  button, a, input, select, textarea {
+    touch-action: manipulation;
+  }
+
+  /* Headings inherit their color cleanly, allowing utility classes (text-blue-600, text-white, etc.) to work naturally */
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.022em;
+    font-weight: 600;
+  }
+
+  input, select, textarea {
+    color: #1d1d1f;
+  }
+
+  html.dark input, 
+  html.dark select, 
+  html.dark textarea {
+    background-color: #16181e;
+    border-color: #2e333d;
+    color: #f3f4f6;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #8e8e93;
+  }
+
+  html.dark input::placeholder, 
+  html.dark textarea::placeholder {
+    color: #717684;
+  }
+}
+
+/* =========================================================================
+   COMPREHENSIVE DARK THEME HARMONIZATION SYSTEM
+   Fixes color distortion, washed out contrast, and unreadable white cards
+   ========================================================================= */
+html.dark {
+  /* Surfaces & Containers */
+  .bg-white:not([data-keep-light]) {
+    background-color: #121418 !important;
+  }
+  .bg-[#f5f5f7]:not([data-keep-light]),
+  .bg-[#fbfbfd]:not([data-keep-light]),
+  .bg-neutral-50:not([data-keep-light]) {
+    background-color: #16181f !important;
+  }
+  .bg-neutral-100:not([data-keep-light]) {
+    background-color: #1d2028 !important;
+  }
+  .bg-neutral-200:not([data-keep-light]) {
+    background-color: #272b36 !important;
+  }
+
+  /* Borders & Dividers */
+  .border-neutral-200,
+  .border-neutral-200\/80,
+  .border-neutral-200\/90,
+  .border-neutral-200\/70,
+  .border-neutral-200\/60 {
+    border-color: #252932 !important;
+  }
+  .border-neutral-300 {
+    border-color: #323744 !important;
+  }
+  .divide-neutral-200 > :not([hidden]) ~ :not([hidden]) {
+    border-color: #252932 !important;
+  }
+
+  /* Typography Contrast in Dark Mode */
+  .text-neutral-900:not([data-keep-dark]):not(.text-white) {
+    color: #f4f5f7 !important;
+  }
+  .text-neutral-800:not([data-keep-dark]):not(.text-white) {
+    color: #e2e4e9 !important;
+  }
+  .text-neutral-700:not([data-keep-dark]):not(.text-white) {
+    color: #cbd0d8 !important;
+  }
+  .text-neutral-600:not([data-keep-dark]) {
+    color: #9ba1ad !important;
+  }
+  .text-neutral-500:not([data-keep-dark]) {
+    color: #7f8695 !important;
+  }
+
+  /* Retain active black badges as distinct high-contrast inverted chips */
+  .bg-black:not([data-keep-dark]) {
+    background-color: #222631 !important;
+    color: #ffffff !important;
+    border-color: #3a3f50 !important;
+  }
+
+  /* Colored semantic containers in Dark Mode (no eye-straining bright neon pastels) */
+  .bg-amber-50, .bg-amber-50\/80 {
+    background-color: rgba(245, 158, 11, 0.12) !important;
+    border-color: rgba(245, 158, 11, 0.25) !important;
+  }
+  .text-amber-900, .text-amber-800 {
+    color: #fcd34d !important;
+  }
+  .bg-blue-50, .bg-blue-50\/80 {
+    background-color: rgba(59, 130, 246, 0.12) !important;
+    border-color: rgba(59, 130, 246, 0.25) !important;
+  }
+  .text-blue-900, .text-blue-800 {
+    color: #93c5fd !important;
+  }
+  .bg-emerald-50, .bg-emerald-50\/80 {
+    background-color: rgba(16, 185, 129, 0.12) !important;
+    border-color: rgba(16, 185, 129, 0.25) !important;
+  }
+  .text-emerald-900, .text-emerald-800 {
+    color: #6ee7b7 !important;
+  }
+  .bg-rose-50, .bg-rose-50\/80 {
+    background-color: rgba(244, 63, 94, 0.12) !important;
+    border-color: rgba(244, 63, 94, 0.25) !important;
+  }
+  .text-rose-900, .text-rose-800 {
+    color: #fda4af !important;
+  }
+  .bg-purple-50, .bg-purple-50\/80 {
+    background-color: rgba(168, 85, 247, 0.12) !important;
+    border-color: rgba(168, 85, 247, 0.25) !important;
+  }
+  .text-purple-900, .text-purple-800 {
+    color: #d8b4fe !important;
+  }
+}
+
+/* Tactile Physical Affordance & Micro-interactions */
+.btn-tactile {
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+}
+.btn-tactile:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+.btn-tactile:active {
+  transform: translateY(0.5px) scale(0.99);
+  box-shadow: none;
+}
+.dark .btn-tactile:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.card-tactile {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-tactile:hover {
+  border-color: rgba(0, 0, 0, 0.28);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  transform: translateY(-1px);
+}
+.dark .card-tactile:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.5);
+}
+
+/* Mobile Smooth Scrolling & Hidden Scrollbar */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Apple Sleek Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d2d2d7;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #86868b;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #2c2c2e;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #48484a;
+}

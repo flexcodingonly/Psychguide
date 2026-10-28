@@ -6,7 +6,7 @@ export const CLINICAL_GUIDELINES_DATA: ClinicalGuideline[] = [
     title: 'Majör Depresif Bozukluk Tedavi Kılavuzu',
     shortTitle: 'MDD Kılavuzu',
     category: 'Duygudurum Bozuklukları',
-    sourceReference: 'CANMAT 2023 / APA 2024 / PsychDB Clinical Algorithm',
+    sourceReference: 'CANMAT / APA / Maudsley & TPD Kılavuz Konsensüsü',
     lastUpdated: '2024 (Güncel Kılavuz Konsensüsü)',
     executiveSummary: 'Majör depresyon tedavisinde ilk basamak antidepresan monoterapisi (SSRI/SNRI/Vortioksetin) ve eşzamanlı kanıta dayalı psikoterapidir (BDT). 4-6 haftalık yeterli doz denemesinde yanıt alınamazsa augmentasyon (atipik antipsikotik veya lityum) veya antidepresan sınıf değişimi uygulanır.',
     diagnosticWorkup: [
@@ -159,7 +159,7 @@ export const CLINICAL_GUIDELINES_DATA: ClinicalGuideline[] = [
     title: 'Bipolar Bozukluk Akut Mani ve İdame Tedavi Kılavuzu',
     shortTitle: 'Bipolar Bozukluk Kılavuzu',
     category: 'Duygudurum Bozuklukları',
-    sourceReference: 'CANMAT / ISBD 2023 Guidelines & PsychDB Algorithm',
+    sourceReference: 'CANMAT / ISBD Guidelines & Maudsley / APA Kılavuzu',
     lastUpdated: '2024 Güncellemesi',
     executiveSummary: 'Bipolar bozuklukta monoterapi antidepresan kullanımı kesinlikle kontrendikedir (hızlı döngülülük ve manik kayma riski). Akut manide birinci basamak Lityum, Divalproeks veya Atipik Antipsikotiklerdir. Uzun dönem idame tedavisinde Lityum intihar önleyici ve nöroprotektif etkisiyle altın standarttır.',
     diagnosticWorkup: [
@@ -286,7 +286,7 @@ export const CLINICAL_GUIDELINES_DATA: ClinicalGuideline[] = [
     title: 'Şizofreni ve Psikoz Klinik Tedavi Kılavuzu',
     shortTitle: 'Şizofreni Kılavuzu',
     category: 'Psikotik Bozukluklar',
-    sourceReference: 'APA 2023 Practice Guideline & PsychDB Consensus',
+    sourceReference: 'APA Practice Guideline & Maudsley / Kaplan & Sadock',
     lastUpdated: '2024 Güncellemesi',
     executiveSummary: 'Şizofreni tedavisinde temel amaç semptom remisyonu, nükslerin önlenmesi ve işlevselliğin korunmasıdır. İlk atak psikozda düşük doz 2. Kuşak Antipsikotik başlanır. Uyumsuzluk durumunda Uzun Etkili Enjekte Edilebilirler (LAI) hızla devreye sokulmalı; 2 başarısız antipsikotik denemesinden sonra vakit kaybetmeden KLOZAPİN başlanmalıdır.',
     diagnosticWorkup: [
@@ -408,7 +408,7 @@ export const CLINICAL_GUIDELINES_DATA: ClinicalGuideline[] = [
     title: 'Anksiyete ve Panik Bozukluk Tedavi Kılavuzu',
     shortTitle: 'Anksiyete & Panik Kılavuzu',
     category: 'Anksiyete & Travma',
-    sourceReference: 'NICE Guidelines & PsychDB Clinical Practice Guide',
+    sourceReference: 'NICE Guidelines & Oxford / Maudsley Clinical Practice Guide',
     lastUpdated: '2024 Güncellemesi',
     executiveSummary: 'Yaygın Anksiyete Bozukluğu (YAB) ve Panik Bozuklukta birinci basamak tedavi SSRI/SNRI grubu antidepresanlar ve Bilişsel Davranışçı Terapidir (BDT). Benzodiazepinler yalnızca ilk 2-4 haftalık köprüleme döneminde veya akut krizde kullanılmalı; bağımlılık riski nedeniyle kronik idame olarak önerilmemektedir.',
     diagnosticWorkup: [
@@ -498,7 +498,7 @@ export const CLINICAL_GUIDELINES_DATA: ClinicalGuideline[] = [
     title: 'Acil Psikiyatri: Akut Ajitasyon ve Kriz Yönetimi',
     shortTitle: 'Acil Ajitasyon Yönetimi',
     category: 'Acil Psikiyatri & Kriz',
-    sourceReference: 'Project BETA (Best practices in Evaluation and Treatment of Agitation) & PsychDB',
+    sourceReference: 'Project BETA (Best practices in Evaluation and Treatment of Agitation) & APA / Maudsley',
     lastUpdated: '2024 Konsensüsü',
     executiveSummary: 'Akut ajitasyon acil bir tıbbi ve psikiyatrik durumdur. İlk ve en önemli kural sözel de-eskalasyon (verbal de-escalation) ve güvenli ortam sağlamaktır. Farmakolojik müdahale gerektiğinde hasta ile işbirliği yapılarak oral ilaçlar öncelenmeli; reddedilmesi ve kendine/çevreye zarar riski halinde parenteral (IM) protokol uygulanmalıdır.',
     diagnosticWorkup: [
@@ -618,7 +618,7 @@ export const CLINICAL_GUIDELINES_DATA: ClinicalGuideline[] = [
     title: 'Alkol Yoksunluk Sendromu ve Delirium Tremens Kılavuzu',
     shortTitle: 'Alkol Yoksunluğu Kılavuzu',
     category: 'Bağımlılık & Toksikoloji',
-    sourceReference: 'ASAM (American Society of Addiction Medicine) & PsychDB Guidelines',
+    sourceReference: 'ASAM (American Society of Addiction Medicine) & WHO / TPD Kılavuzları',
     lastUpdated: '2024 Güncellemesi',
     executiveSummary: 'Alkol yoksunluğu potansiyel olarak ölümcül (mortalite %5-15) bir tıbbi acildir. Tedavinin temel taşı CIWA-Ar skoru bazlı semptom-tetiklemeli benzodiazepin protokolü ve Wernicke ensefalopatisini önlemek için glukozdan ÖNCE parenteral yüksek doz Tiamin (B1) verilmesidir.',
     diagnosticWorkup: [

@@ -324,3 +324,162 @@ export const LITHIUM_LEVEL_PROTOCOL = {
     }
   ]
 };
+
+export interface QtcRiskItem {
+  drug: string;
+  drugClass: string;
+  credibleMedsCategory: 'Bilinen TdP Riski (Known Risk)' | 'Olası TdP Riski (Possible Risk)' | 'Koşullu TdP Riski (Conditional Risk)';
+  meanQcProlongation: string;
+  clinicalRecommendation: string;
+}
+
+export const QTC_RISK_DATA: QtcRiskItem[] = [
+  {
+    drug: 'Sitalopram / Essitalopram',
+    drugClass: 'SSRI',
+    credibleMedsCategory: 'Bilinen TdP Riski (Known Risk)',
+    meanQcProlongation: '+10 ila +18 ms (özellikle >40 mg sitalopram veya >20 mg essitalopram)',
+    clinicalRecommendation: 'FDA uyarısı: Sitalopram >40 mg/gün (yaşlıda >20 mg) önerilmez. Bazal EKG ve elektrolit (K, Mg) takibi şarttır.'
+  },
+  {
+    drug: 'Haloperidol (özellikle IV)',
+    drugClass: 'Tipik Antipsikotik',
+    credibleMedsCategory: 'Bilinen TdP Riski (Known Risk)',
+    meanQcProlongation: '+15 ila +30 ms (IV formda ölümcül TdP riski çok yüksektir)',
+    clinicalRecommendation: 'IV Haloperidol uygulanacaksa sürekli EKG monitörizasyonu zorunludur. Oral ve IM formda risk daha düşüktür.'
+  },
+  {
+    drug: 'Tioridazin / Pimozid / Ziprasidon',
+    drugClass: 'Tipik / Atipik Antipsikotik',
+    credibleMedsCategory: 'Bilinen TdP Riski (Known Risk)',
+    meanQcProlongation: '+15 ila +22 ms',
+    clinicalRecommendation: 'Tioridazin yüksek TdP nedeniyle kullanımdan kalkmıştır. Ziprasidon diğer yeni kuşaklara göre daha çok uzatır; kardiyak öyküsü olanda kaçınılmalıdır.'
+  },
+  {
+    drug: 'Trisiklik Antidepresanlar (Amitriptilin, Klomipramin)',
+    drugClass: 'TSA',
+    credibleMedsCategory: 'Bilinen TdP Riski (Known Risk)',
+    meanQcProlongation: '+15 ila +25 ms (ayrıca QRS genişlemesi yapar)',
+    clinicalRecommendation: 'Geniş spektrumlu kardiyotoksik etki (Na kanal blokajı). Yaşlıda veya kardiyak hastada SSRI\'lar tercih edilmelidir.'
+  },
+  {
+    drug: 'Ketiapin / Olanzapin / Risperidon',
+    drugClass: 'Atipik Antipsikotik',
+    credibleMedsCategory: 'Olası TdP Riski (Possible Risk)',
+    meanQcProlongation: '+5 ila +12 ms',
+    clinicalRecommendation: 'Monoterapide terapötik dozda risk düşüktür. Hipokalemi, hipomagnezemi veya CYP inhibitörleri eşliğinde risk artar.'
+  },
+  {
+    drug: 'Aripiprazol / Lurasidon',
+    drugClass: 'Atipik Antipsikotik',
+    credibleMedsCategory: 'Koşullu TdP Riski (Conditional Risk)',
+    meanQcProlongation: '0 ila +4 ms (Kardiyak açıdan en güvenliler)',
+    clinicalRecommendation: 'QTc uzaması riski en düşük antipsikotiklerdir. Kardiyak komorbiditesi olanlarda ilk tercihlerdendir.'
+  }
+];
+
+export interface RenalHepaticAdjustment {
+  drug: string;
+  classType: string;
+  renalDosing: string;
+  hepaticDosing: string;
+  keyRule: string;
+}
+
+export const RENAL_HEPATIC_DATA: RenalHepaticAdjustment[] = [
+  {
+    drug: 'Lityum',
+    classType: 'Duygudurum Dengeleyici',
+    renalDosing: 'CrCl 50-80: %50-75 doz; CrCl 10-50: %25-50 doz; CrCl <10 ise KONTRENDİKE veya diyalizle yakın takip.',
+    hepaticDosing: 'Doz ayarlaması gerekmez (tamamen böbrekten değişmeden atılır).',
+    keyRule: 'Renal yetmezlikte toksisite ölümcüldür. Sıkı TDM ve GFR takibi zorunludur.'
+  },
+  {
+    drug: 'Valproat (Depakin)',
+    classType: 'Duygudurum Dengeleyici',
+    renalDosing: 'Doz ayarlaması gerekmez (serbest fraksiyon artabilir, serbest düzey bakılabilir).',
+    hepaticDosing: 'Akut hepatit, belirgin karaciğer yetmezliği veya Child-Pugh C\'de KESİNLİKLE KONTRENDİKEDİR.',
+    keyRule: 'Hepatotoksisite ve hiperamonyemi riski nedeniyle KCFT (AST/ALT/Bilirubin) rutin taranmalıdır.'
+  },
+  {
+    drug: 'Paliperidon',
+    classType: 'Atipik Antipsikotik',
+    renalDosing: 'CrCl 50-80: Maks 6 mg/gün; CrCl 10-50: Maks 3 mg/gün; CrCl <10 ise önerilmez.',
+    hepaticDosing: 'Hafif-orta yetmezlikte doz ayarı gerekmez; Child-Pugh C\'de dikkatli olunmalıdır.',
+    keyRule: '%60 böbrekten değişmeden atılır; risperidona kıyasla renal fonksiyona daha bağımlıdır.'
+  },
+  {
+    drug: 'Duloksetin',
+    classType: 'SNRI',
+    renalDosing: 'CrCl <30 ml/dk (Son dönem böbrek hastalığı) durumunda KULLANILMAMALIDIR.',
+    hepaticDosing: 'Kronik karaciğer hastalığı veya sirozda KESİNLİKLE KONTRENDİKEDİR.',
+    keyRule: 'Hepatik yetmezlikte plazma konsantrasyonu aşırı yükselir ve karaciğer hasarını tetikleyebilir.'
+  },
+  {
+    drug: 'Gabapentin / Pregabalin',
+    classType: 'GABA Analoğu / Anksiyolitik',
+    renalDosing: 'CrCl <60 ml/dk\'da doz %50; CrCl <30\'da %75 azaltılmalıdır. Diyaliz hastalarında diyaliz sonrası ek doz verilir.',
+    hepaticDosing: 'Karaciğerde metabolize olmaz; hepatik yetmezlikte tam doz verilebilir.',
+    keyRule: 'Böbrekten atılır. Yaşlıda doz azaltılmazsa miyoklonus, derin sedasyon ve solunum arresti gelişebilir.'
+  },
+  {
+    drug: 'Benzodiazepinler (Lorazepam / Oksazepam)',
+    classType: 'Benzodiazepin',
+    renalDosing: 'Aktif metaboliti olmayan (Lorazepam) tercih edilmeli, orta dozlar verilmelidir.',
+    hepaticDosing: 'Karaciğer yetmezliğinde tek güvenli grup (LOT: Lorazepam, Oxazepam, Temazepam).',
+    keyRule: 'Diazepam ve klonazepam gibi CYP\'ye bağımlı ve uzun etkili BZD\'ler sirozda hepatik komayı tetikler.'
+  }
+];
+
+export interface CypMatrixRow {
+  enzyme: string;
+  majorSubstrates: string[];
+  strongInhibitors: string[];
+  strongInducers: string[];
+  clinicalSignificance: string;
+}
+
+export const CYP_MATRIX_DATA: CypMatrixRow[] = [
+  {
+    enzyme: 'CYP1A2',
+    majorSubstrates: ['Klozapin', 'Olanzapin', 'Duloksetin', 'Agomelatin', 'Teofilin'],
+    strongInhibitors: ['Fluvoksamin', 'Siprofloksasin (Cipro)'],
+    strongInducers: ['Tütün / Sigara dumanı (Polisiklik aromatik hidrokarbonlar)', 'Karbamazepin'],
+    clinicalSignificance: 'Sigarayı bırakan hastada klozapin düzeyi %50-100 fırlar (toksisite riski). Fluvoksamin + Klozapin kombinasyonu ölümcüldür.'
+  },
+  {
+    enzyme: 'CYP2D6',
+    majorSubstrates: ['Risperidon', 'Aripiprazol', 'Haloperidol', 'Venlafaksin', 'Atomoksetin', 'Metoprolol'],
+    strongInhibitors: ['Fluoksetin', 'Paroksetin', 'Bupropion', 'Kinidin'],
+    strongInducers: ['Klasik olarak indüklenemez (Genetik polimorfizm esastır: Yavaş / Hızlı metabolize ediciler)'],
+    clinicalSignificance: 'Fluoksetin veya Paroksetin alan hastaya Risperidon eklenirse belirgin EPS ve hiperprolaktinemi ortaya çıkar.'
+  },
+  {
+    enzyme: 'CYP3A4',
+    majorSubstrates: ['Ketiapin', 'Aripiprazol', 'Zolpidem', 'Alprazolam', 'Midazolam', 'Sertralin'],
+    strongInhibitors: ['Ketokonazol / İtrakonazol', 'Klaritromisin', 'Greyfurt suyu'],
+    strongInducers: ['Karbamazepin', 'Rifampisin', 'Sarı Kantaron (St. John\'s Wort)', 'Fenitoin'],
+    clinicalSignificance: 'Vücuttaki ilaçların %50\'si bu enzimle yıkılır. Karbamazepin başlandığında Ketiapin seviyesi %80 düşer, yetersiz yanıt oluşur.'
+  },
+  {
+    enzyme: 'CYP2C19',
+    majorSubstrates: ['Sitalopram', 'Essitalopram', 'Sertralin', 'Diazepam'],
+    strongInhibitors: ['Fluvoksamin', 'Omeprazol / Esomeprazol', 'Flukonazol'],
+    strongInducers: ['Rifampisin', 'Karbamazepin'],
+    clinicalSignificance: 'Omeprazol (Proton pompası inhibitörü) alan hastada sitalopram kan düzeyi 2 katına çıkar; QTc uzaması riski katlanır.'
+  }
+];
+
+export const METABOLIC_MONITORING_PROTOCOL = {
+  title: 'Antipsikotik İlaçlarda Metabolik Sendrom İzlem Takvimi (ADA / APA)',
+  description: 'İkinci kuşak antipsikotiklerde kilo alımı, diyabet ve dislipidemi tarama protokolü.',
+  schedule: [
+    { parameter: 'Kişisel & Ailevi Öykü', baseline: 'Var', week4: '-', week8: '-', week12: '-', annually: 'Yılda bir' },
+    { parameter: 'Kilo & Vücut Kitle İndeksi (BMI)', baseline: 'Var', week4: 'Var', week8: 'Var', week12: 'Var', annually: '3 ayda bir' },
+    { parameter: 'Bel Çevresi', baseline: 'Var', week4: '-', week8: '-', week12: '-', annually: 'Yılda bir' },
+    { parameter: 'Kan Basıncı (Tansiyon)', baseline: 'Var', week4: '-', week8: '-', week12: 'Var', annually: 'Yılda bir' },
+    { parameter: 'Açlık Kan Şekeri (AKŞ / HbA1c)', baseline: 'Var', week4: '-', week8: '-', week12: 'Var', annually: 'Yılda bir' },
+    { parameter: 'Açlık Lipid Profili (Kolesterol, Trigliserid)', baseline: 'Var', week4: '-', week8: '-', week12: 'Var', annually: 'Yılda bir (riskte 6 ayda bir)' }
+  ]
+};
+

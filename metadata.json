@@ -1,6 +1,6 @@
 {
   "name": "PSYCHDS - Klinik Psikiyatri & Karar Destek Rehberi",
-  "description": "DSM-5-TR, PsychDB ve kanıta dayalı klinik kılavuzlarla yapılandırılmış akademik psikiyatri portalı, iki ilaç etkileşim matrisi ve mental durum muayenesi.",
+  "description": "DSM-5-TR, Maudsley, Stahl, Kaplan & Sadock, Oxford, APA ve TPD kılavuzlarıyla yapılandırılmış akademik psikiyatri portalı, iki ilaç etkileşim matrisi ve mental durum muayenesi.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

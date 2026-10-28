@@ -1,12 +1,12 @@
 export type NavSection = 
-  | 'mse'
-  | 'tables'
-  | 'disorders'
-  | 'interactions'
-  | 'scales'
-  | 'psychodynamics'
-  | 'guidelines'
-  | 'references';
+  | 'tables'        // 1. Tablolar & Hızlı Araçlar
+  | 'assessment'    // 2. Değerlendirme & MSE
+  | 'scales'        // 3. Klinik Ölçekler (Müstakil Ana Sekme)
+  | 'disorders'     // 4. Tanılar
+  | 'treatments'    // 5. Tedaviler & İlaçlar
+  | 'emergency'     // 6. Acil Psikiyatri
+  | 'special_areas' // 7. Diğer / Özel Alanlar
+  | 'references';   // 8. Kaynakça & Literatür
 
 export interface GuidelineAlgorithmStep {
   stepNumber: number;
@@ -29,7 +29,7 @@ export interface ClinicalGuideline {
   title: string;
   shortTitle: string;
   category: 'Duygudurum Bozuklukları' | 'Psikotik Bozukluklar' | 'Anksiyete & Travma' | 'Nörogelişimsel' | 'Acil Psikiyatri & Kriz' | 'Bağımlılık & Toksikoloji' | 'Özel Popülasyonlar';
-  sourceReference: string; // e.g. "CANMAT 2023 / APA 2024 / PsychDB Clinical Guide"
+  sourceReference: string; // e.g. "Maudsley / Stahl / Kaplan & Sadock / APA / TPD"
   lastUpdated: string;
   diagnosticWorkup: string[]; // Rutin tetkikler, TSH, B12, EKG vb.
   executiveSummary: string;
@@ -178,6 +178,7 @@ export interface MSECaseExample {
 export interface ClinicalScaleQuestion {
   id: number;
   text: string;
+  subscale?: string;
   options: { label: string; value: number }[];
 }
 
@@ -185,6 +186,7 @@ export interface ClinicalScale {
   id: string;
   code: string;
   name: string;
+  category: string;
   targetCondition: string;
   description: string;
   timeframe: string;

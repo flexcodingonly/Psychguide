@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DEFENSE_MECHANISMS_DATA, PSYCHODYNAMIC_SCHOOLS_DATA } from '../data/psychodynamicsData';
-import { Search, ShieldAlert, Sparkles, Brain, BookOpen, Layers, HeartHandshake, Eye } from 'lucide-react';
+import { Search, ShieldAlert, Sparkles, Brain, BookOpen, Layers, HeartHandshake } from 'lucide-react';
+import { GeometricDiamondCornerOrnament, NumberedDiamond } from './MedicalThemeDecorations';
 
 export const PsychodynamicsView: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'defenses' | 'theories' | 'formulation'>('defenses');
@@ -29,50 +30,51 @@ export const PsychodynamicsView: React.FC = () => {
   return (
     <div className="space-y-6" id="psychodynamics-view-root">
       {/* Header Banner */}
-      <div className="border border-neutral-800 bg-[#0d0d0d] p-5 sm:p-6 text-white relative overflow-hidden shadow-2xl">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-red-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+      <div className="border border-neutral-200 bg-white p-5 sm:p-6 text-neutral-900 relative overflow-hidden shadow-2xl rounded-lg">
+        <GeometricDiamondCornerOrnament className="absolute -top-4 -right-4 hidden sm:block text-neutral-700" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-red-950/60 border border-red-800/80 text-red-400 text-xs font-mono uppercase tracking-wider mb-2">
-              <Brain className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-neutral-50 border border-neutral-300 text-neutral-900 text-xs font-mono uppercase tracking-wider mb-2 rounded-lg">
+              <span className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff]" />
+              <Brain className="w-3.5 h-3.5 text-neutral-800" />
               Klinik Psikodinamik Psikiyatri
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-neutral-900 font-display">
               Psikodinamik Yaklaşım & Savunma Mekanizmaları
             </h1>
-            <p className="text-neutral-400 text-sm mt-1 max-w-2xl leading-relaxed">
+            <p className="text-neutral-700 text-sm mt-1 max-w-2xl leading-relaxed">
               Freud, Melanie Klein, Winnicott, Kernberg ve Kohut ekseninde ego savunma düzenekleri,
               kişilik örgütlenmeleri, aktarım yönetimi ve psikodinamik vaka formülasyonu.
             </p>
           </div>
 
-          <div className="flex bg-neutral-900 p-1 border border-neutral-800 self-start md:self-auto">
+          <div className="flex bg-neutral-50 p-1 border border-neutral-200 self-start md:self-auto rounded-lg">
             <button
               onClick={() => setActiveTab('defenses')}
-              className={`px-3 py-1.5 text-xs font-medium transition-all ${
+              className={`px-3 py-1.5 text-xs font-medium transition-all rounded-lg cursor-pointer ${
                 activeTab === 'defenses'
-                  ? 'bg-red-600 text-white shadow'
-                  : 'text-neutral-400 hover:text-white'
+                  ? 'bg-white text-black font-bold shadow'
+                  : 'text-neutral-500 hover:text-neutral-900'
               }`}
             >
               Savunma Mekanizmaları
             </button>
             <button
               onClick={() => setActiveTab('theories')}
-              className={`px-3 py-1.5 text-xs font-medium transition-all ${
+              className={`px-3 py-1.5 text-xs font-medium transition-all rounded-lg cursor-pointer ${
                 activeTab === 'theories'
-                  ? 'bg-red-600 text-white shadow'
-                  : 'text-neutral-400 hover:text-white'
+                  ? 'bg-white text-black font-bold shadow'
+                  : 'text-neutral-500 hover:text-neutral-900'
               }`}
             >
               Ekoller & Aktarım
             </button>
             <button
               onClick={() => setActiveTab('formulation')}
-              className={`px-3 py-1.5 text-xs font-medium transition-all ${
+              className={`px-3 py-1.5 text-xs font-medium transition-all rounded-lg cursor-pointer ${
                 activeTab === 'formulation'
-                  ? 'bg-red-600 text-white shadow'
-                  : 'text-neutral-400 hover:text-white'
+                  ? 'bg-white text-black font-bold shadow'
+                  : 'text-neutral-500 hover:text-neutral-900'
               }`}
             >
               Vaka Formülasyonu
@@ -93,7 +95,7 @@ export const PsychodynamicsView: React.FC = () => {
                 placeholder="Savunma adı, Türkçe karşılığı veya patoloji ara..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#111111] border border-neutral-800 pl-9 pr-4 py-2 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-red-600"
+                className="w-full bg-white border border-neutral-200 pl-9 pr-4 py-2 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-neutral-900 rounded-lg"
               />
             </div>
 
@@ -103,10 +105,10 @@ export const PsychodynamicsView: React.FC = () => {
                 <button
                   key={lvl.id}
                   onClick={() => setSelectedLevel(lvl.id)}
-                  className={`px-2.5 py-1 text-xs border transition-colors ${
+                  className={`px-2.5 py-1 text-xs border transition-colors rounded-lg cursor-pointer ${
                     selectedLevel === lvl.id
-                      ? 'bg-red-600 border-red-500 text-white font-medium'
-                      : 'bg-[#111111] border-neutral-800 text-neutral-400 hover:text-neutral-200'
+                      ? 'bg-white border-white text-black font-bold'
+                      : 'bg-white border-neutral-200 text-neutral-500 hover:text-neutral-900'
                   }`}
                 >
                   {lvl.label}
@@ -122,72 +124,71 @@ export const PsychodynamicsView: React.FC = () => {
               const isPrimitive = def.level.includes('İlkel');
               const isImmature = def.level.includes('İmmatür');
               const isNeurotic = def.level.includes('Nevrotik');
-              const isMature = def.level.includes('Olgun');
 
               const badgeColor = isPrimitive
-                ? 'border-red-800/80 bg-red-950/40 text-red-400'
+                ? 'border-neutral-300 bg-neutral-100 text-neutral-900 font-semibold'
                 : isImmature
-                ? 'border-amber-800/80 bg-amber-950/40 text-amber-400'
+                ? 'border-neutral-300 bg-neutral-50 text-neutral-800'
                 : isNeurotic
-                ? 'border-neutral-700 bg-neutral-900 text-neutral-300'
-                : 'border-emerald-800/80 bg-emerald-950/40 text-emerald-400';
+                ? 'border-neutral-200 bg-white text-neutral-700'
+                : 'border-neutral-300 bg-neutral-100 text-neutral-800';
 
               return (
                 <div
                   key={def.id}
-                  className={`border transition-all cursor-pointer ${
+                  className={`border transition-all cursor-pointer rounded-lg ${
                     isExpanded
-                      ? 'bg-[#141414] border-red-600/70 shadow-lg ring-1 ring-red-600/30'
-                      : 'bg-[#0f0f0f] border-neutral-800/90 hover:border-neutral-700'
+                      ? 'bg-white border-neutral-500 shadow-xl ring-1 ring-white/20'
+                      : 'bg-white border-neutral-200 hover:border-neutral-400'
                   } p-5`}
                   onClick={() => setExpandedDefenseId(isExpanded ? null : def.id)}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-white text-base tracking-wide">
+                        <span className="font-bold text-neutral-900 text-base tracking-wide font-display">
                           {def.turkishName}
                         </span>
                         <span className="text-xs text-neutral-500 font-mono">
                           ({def.name})
                         </span>
                       </div>
-                      <span className={`inline-block px-2 py-0.5 text-[11px] font-medium border mt-1.5 ${badgeColor}`}>
+                      <span className={`inline-block px-2 py-0.5 text-[11px] font-medium border mt-1.5 rounded-lg ${badgeColor}`}>
                         {def.level}
                       </span>
                     </div>
                   </div>
 
-                  <p className="text-sm text-neutral-300 mt-3 leading-relaxed">
+                  <p className="text-sm text-neutral-700 mt-3 leading-relaxed">
                     {def.definition}
                   </p>
 
                   {isExpanded && (
-                    <div className="mt-4 pt-4 border-t border-neutral-800/80 space-y-3 text-xs">
-                      <div className="p-3 bg-black/60 border border-neutral-800/80">
-                        <span className="font-semibold text-red-400 uppercase tracking-wider block mb-1">
+                    <div className="mt-4 pt-4 border-t border-neutral-200 space-y-3 text-xs">
+                      <div className="p-3 bg-white border border-neutral-200 rounded-lg">
+                        <span className="font-bold text-neutral-900 uppercase tracking-wider block mb-1">
                           Klinik Örnek & Tezahür:
                         </span>
-                        <p className="text-neutral-300 italic leading-relaxed">
+                        <p className="text-neutral-700 italic leading-relaxed">
                           "{def.clinicalExample}"
                         </p>
                       </div>
 
                       <div>
-                        <span className="font-semibold text-neutral-400 uppercase tracking-wider block mb-1">
+                        <span className="font-bold text-neutral-500 uppercase tracking-wider block mb-1">
                           İlişkili Klinik Durumlar:
                         </span>
-                        <p className="text-neutral-200">
+                        <p className="text-neutral-800">
                           {def.associatedPathology}
                         </p>
                       </div>
 
-                      <div className="p-3 bg-red-950/20 border border-red-900/40">
-                        <span className="font-semibold text-red-400 uppercase tracking-wider block mb-1 flex items-center gap-1.5">
-                          <HeartHandshake className="w-3.5 h-3.5" />
+                      <div className="p-3 bg-neutral-50 border border-neutral-300 rounded-lg">
+                        <span className="font-bold text-neutral-900 uppercase tracking-wider block mb-1 flex items-center gap-1.5">
+                          <HeartHandshake className="w-3.5 h-3.5 text-neutral-800" />
                           Hekim Yaklaşımı & Terapötik Müdahale:
                         </span>
-                        <p className="text-neutral-300 leading-relaxed">
+                        <p className="text-neutral-700 leading-relaxed">
                           {def.therapeuticApproach}
                         </p>
                       </div>
@@ -203,7 +204,7 @@ export const PsychodynamicsView: React.FC = () => {
           </div>
 
           {filteredDefenses.length === 0 && (
-            <div className="p-8 text-center border border-neutral-800 bg-[#0d0d0d] text-neutral-400">
+            <div className="p-8 text-center border border-neutral-200 bg-white text-neutral-500 rounded-lg">
               Arama kriterlerine uygun savunma mekanizması bulunamadı.
             </div>
           )}
@@ -217,14 +218,14 @@ export const PsychodynamicsView: React.FC = () => {
             {PSYCHODYNAMIC_SCHOOLS_DATA.map((school) => (
               <div
                 key={school.id}
-                className="border border-neutral-800 bg-[#0d0d0d] p-5 hover:border-neutral-700 transition-colors"
+                className="border border-neutral-200 bg-white p-5 hover:border-neutral-400 transition-colors rounded-lg"
               >
-                <div className="flex items-start justify-between pb-3 border-b border-neutral-800">
+                <div className="flex items-start justify-between pb-3 border-b border-neutral-200">
                   <div>
-                    <h3 className="font-bold text-white text-lg tracking-tight">
+                    <h3 className="font-bold text-neutral-900 text-lg tracking-tight font-display">
                       {school.title}
                     </h3>
-                    <p className="text-xs text-red-400 font-mono mt-0.5">
+                    <p className="text-xs text-neutral-500 font-mono mt-0.5">
                       Öncü Kuramcılar: {school.theorists}
                     </p>
                   </div>
@@ -233,26 +234,26 @@ export const PsychodynamicsView: React.FC = () => {
 
                 <div className="mt-4 space-y-4">
                   {school.coreConcepts.map((concept, idx) => (
-                    <div key={idx} className="p-3 bg-[#131313] border border-neutral-800/80">
-                      <h4 className="font-semibold text-sm text-neutral-200 flex items-center gap-1.5 mb-1">
-                        <Sparkles className="w-3 h-3 text-red-500" />
+                    <div key={idx} className="p-3 bg-white border border-neutral-200 rounded-lg">
+                      <h4 className="font-semibold text-sm text-neutral-900 flex items-center gap-1.5 mb-1">
+                        <Sparkles className="w-3 h-3 text-neutral-800" />
                         {concept.term}
                       </h4>
-                      <p className="text-xs text-neutral-400 leading-relaxed mb-2">
+                      <p className="text-xs text-neutral-500 leading-relaxed mb-2">
                         {concept.explanation}
                       </p>
-                      <div className="text-xs border-l-2 border-red-600 pl-2 text-neutral-300 bg-neutral-900/50 py-1">
-                        <span className="text-red-400 font-semibold">Klinik Yansıma: </span>
+                      <div className="text-xs border-l-2 border-white pl-2 text-neutral-700 bg-white py-1">
+                        <span className="text-neutral-900 font-semibold">Klinik Yansıma: </span>
                         {concept.clinicalApplication}
                       </div>
                     </div>
                   ))}
 
-                  <div className="p-3 bg-red-950/20 border border-red-900/40 text-xs">
-                    <span className="text-red-400 font-bold block mb-1">
+                  <div className="p-3 bg-neutral-50 border border-neutral-200 text-xs rounded-lg">
+                    <span className="text-neutral-900 font-bold block mb-1">
                       Klinik Psikiyatrideki Yeri:
                     </span>
-                    <p className="text-neutral-300 leading-relaxed">
+                    <p className="text-neutral-700 leading-relaxed">
                       {school.clinicalRelevanceInPsychiatry}
                     </p>
                   </div>
@@ -262,42 +263,42 @@ export const PsychodynamicsView: React.FC = () => {
           </div>
 
           {/* Special Section: Kernberg Kişilik Örgütlenmesi Karşılaştırma Tablosu */}
-          <div className="border border-neutral-800 bg-[#0d0d0d] p-5">
-            <h3 className="font-bold text-white text-base mb-3 flex items-center gap-2">
-              <ShieldAlert className="w-4 h-4 text-red-500" />
+          <div className="border border-neutral-200 bg-white p-5 rounded-lg">
+            <h3 className="font-bold text-neutral-900 text-base mb-3 flex items-center gap-2 font-display">
+              <ShieldAlert className="w-4 h-4 text-neutral-800" />
               Otto Kernberg Yapısal Kişilik Örgütlenmeleri Karşılaştırma Matrisi
             </h3>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border border-neutral-800">
-                <thead className="bg-[#151515] text-neutral-300 uppercase tracking-wider font-mono border-b border-neutral-800">
+              <table className="w-full text-left text-xs border border-neutral-200 rounded-lg">
+                <thead className="bg-white text-neutral-800 uppercase tracking-wider font-mono border-b border-neutral-200">
                   <tr>
                     <th className="p-3">Yapısal Boyut</th>
-                    <th className="p-3 text-emerald-400">Nevrotik Düzey</th>
-                    <th className="p-3 text-amber-400">Borderline Düzey</th>
-                    <th className="p-3 text-red-400">Psikotik Düzey</th>
+                    <th className="p-3 text-neutral-900">Nevrotik Düzey</th>
+                    <th className="p-3 text-neutral-800">Borderline Düzey</th>
+                    <th className="p-3 text-neutral-700">Psikotik Düzey</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-800 text-neutral-300">
+                <tbody className="divide-y divide-neutral-800 text-neutral-700">
                   <tr>
-                    <td className="p-3 font-semibold text-white">Kimlik Bütünlüğü</td>
+                    <td className="p-3 font-semibold text-neutral-900">Kimlik Bütünlüğü</td>
                     <td className="p-3">Bütünleşmiş kimlik (Kendilik ve ötekiler tutarlı algılanır)</td>
                     <td className="p-3">Kimlik Difüzyonu (Parçalı, çelişkili, boşluk hissi)</td>
                     <td className="p-3">Kimlik Kaybı (Kendilik ile nesne sınırları erimiş)</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-white">Savunma Düzeneği</td>
+                    <td className="p-3 font-semibold text-neutral-900">Savunma Düzeneği</td>
                     <td className="p-3">Olgun ve Nevrotik (Bastırma, Yalıtma, Karşıt Tepki)</td>
                     <td className="p-3">İlkel (Bölme / Splitting, Yansıtmalı Özdeşim, Eyleme Vurma)</td>
                     <td className="p-3">İlkel (İnkar, Yansıtma, Parçalanma)</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-white">Gerçeklik Değerlendirmesi</td>
+                    <td className="p-3 font-semibold text-neutral-900">Gerçeklik Değerlendirmesi</td>
                     <td className="p-3">Tamamen korunmuş</td>
                     <td className="p-3">Korunmuş (Yoğun stres/duygulanım altında geçici bozulabilir)</td>
                     <td className="p-3">Ciddi düzeyde bozulmuş (Hezeyanlar, Halüsinasyonlar)</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-white">Terapötik Hedef</td>
+                    <td className="p-3 font-semibold text-neutral-900">Terapötik Hedef</td>
                     <td className="p-3">İntrapsişik çatışmaları çözme, içgörü kazandırma</td>
                     <td className="p-3">Çerçeve koyma, bölmeyi yorumlama, duygu regülasyonu</td>
                     <td className="p-3">Destekleme, gerçeklik testi, antipsikotik koruma</td>
@@ -311,59 +312,59 @@ export const PsychodynamicsView: React.FC = () => {
 
       {/* Tab 3: Psikodinamik Vaka Formülasyonu Rehberi */}
       {activeTab === 'formulation' && (
-        <div className="border border-neutral-800 bg-[#0d0d0d] p-6 space-y-6 text-white">
-          <div className="border-b border-neutral-800 pb-4">
-            <h3 className="text-xl font-bold flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-red-500" />
+        <div className="border border-neutral-200 bg-white p-6 space-y-6 text-neutral-900 rounded-lg">
+          <div className="border-b border-neutral-200 pb-4">
+            <h3 className="text-xl font-bold flex items-center gap-2 font-display">
+              <BookOpen className="w-5 h-5 text-neutral-800" />
               Psikiyatride 4 Boyutlu Psikodinamik Vaka Formülasyonu
             </h3>
-            <p className="text-sm text-neutral-400 mt-1">
+            <p className="text-sm text-neutral-500 mt-1">
               Yalnızca DSM tanı kodlaması yapmak yerine hastanın "Neden şimdi?", "Hangi karakter zemininde?",
               ve "Hangi çatışma nedeniyle?" hastalandığını gösteren klinik harita.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="p-4 bg-[#141414] border border-neutral-800 space-y-2">
-              <div className="flex items-center gap-2 text-red-400 font-bold text-sm uppercase">
-                <span className="w-6 h-6 rounded-full bg-red-950 border border-red-700 flex items-center justify-center text-xs">1</span>
+            <div className="p-5 bg-white border border-neutral-200 space-y-3 rounded-lg">
+              <div className="flex items-center gap-3 text-neutral-900 font-bold text-sm uppercase font-mono">
+                <NumberedDiamond num={1} active={true} size="sm" />
                 Tetikleyici Faktör & Güncel Kriz
               </div>
-              <p className="text-xs text-neutral-300 leading-relaxed">
+              <p className="text-xs text-neutral-700 leading-relaxed">
                 Belirtilerin aniden tetiklendiği sembolik olay (terk edilme, terfi, emeklilik, hastalık, kayıp).
                 Olayın hastanın çocukluk çatışmaları ve kırılganlıklarıyla sembolik rezonansı nedir?
               </p>
             </div>
 
-            <div className="p-4 bg-[#141414] border border-neutral-800 space-y-2">
-              <div className="flex items-center gap-2 text-red-400 font-bold text-sm uppercase">
-                <span className="w-6 h-6 rounded-full bg-red-950 border border-red-700 flex items-center justify-center text-xs">2</span>
+            <div className="p-5 bg-white border border-neutral-200 space-y-3 rounded-lg">
+              <div className="flex items-center gap-3 text-neutral-900 font-bold text-sm uppercase font-mono">
+                <NumberedDiamond num={2} active={true} size="sm" />
                 Çekirdek Çatışma (CCRT Modeli)
               </div>
-              <p className="text-xs text-neutral-300 leading-relaxed">
+              <p className="text-xs text-neutral-700 leading-relaxed">
                 <strong>İstek (Wish):</strong> Hastanın başkalarından arzuladığı şey (örn. "Beni koşulsuz sevsinler").<br />
                 <strong>Ötekinin Yanıtı (RO):</strong> Beklediği/algıladığı tepki (örn. "Beni sömürecek ve aşağılayacaklar").<br />
                 <strong>Kendiliğin Yanıtı (RS):</strong> Çatışmaya verdiği tepki (örn. "Geri çekilip derin depresyona giriyorum").
               </p>
             </div>
 
-            <div className="p-4 bg-[#141414] border border-neutral-800 space-y-2">
-              <div className="flex items-center gap-2 text-red-400 font-bold text-sm uppercase">
-                <span className="w-6 h-6 rounded-full bg-red-950 border border-red-700 flex items-center justify-center text-xs">3</span>
+            <div className="p-5 bg-white border border-neutral-200 space-y-3 rounded-lg">
+              <div className="flex items-center gap-3 text-neutral-900 font-bold text-sm uppercase font-mono">
+                <NumberedDiamond num={3} active={true} size="sm" />
                 Karakter Yapısı & Savunma Aygıtı
               </div>
-              <p className="text-xs text-neutral-300 leading-relaxed">
+              <p className="text-xs text-neutral-700 leading-relaxed">
                 Hangi ego savunmalarını baskın olarak kullanıyor? (İlkel bölme ve eyleme vurma mı, yoksa obsesif yalıtma ve rasyonalizasyon mu?)
                 Kişilik örgütlenmesi düzeyi (Nevrotik - Borderline - Psikotik).
               </p>
             </div>
 
-            <div className="p-4 bg-[#141414] border border-neutral-800 space-y-2">
-              <div className="flex items-center gap-2 text-red-400 font-bold text-sm uppercase">
-                <span className="w-6 h-6 rounded-full bg-red-950 border border-red-700 flex items-center justify-center text-xs">4</span>
+            <div className="p-5 bg-white border border-neutral-200 space-y-3 rounded-lg">
+              <div className="flex items-center gap-3 text-neutral-900 font-bold text-sm uppercase font-mono">
+                <NumberedDiamond num={4} active={true} size="sm" />
                 Terapötik İlişki & Karşı-Aktarım Tuzakları
               </div>
-              <p className="text-xs text-neutral-300 leading-relaxed">
+              <p className="text-xs text-neutral-700 leading-relaxed">
                 Hasta hekimi nasıl konumlandırıyor (Aktarım: Suçlayıcı otorite mi, kurtarıcı mı)?
                 Hekimde uyanan karşı-aktarım duyguları (öfke, aşırı korumacılık, bıkkınlık).
                 Tedavi çerçevesinin (süre, vizit sıklığı, sınırlar) yapılandırılması.

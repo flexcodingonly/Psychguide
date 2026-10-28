@@ -5,7 +5,6 @@ import {
   Check, 
   RotateCcw, 
   FileText, 
-  Info, 
   CheckSquare, 
   Square, 
   Sparkles, 
@@ -29,6 +28,7 @@ import {
   MSE_RED_FLAGS_DATA,
   PROFESSOR_FULL_TEMPLATE 
 } from '../data/mseData';
+import { GeometricDiamondCornerOrnament } from './MedicalThemeDecorations';
 
 type MSETutorialTab = 'generator' | 'tension_points' | 'red_flags' | 'medicolegal' | 'case_examples' | 'glossary';
 
@@ -170,7 +170,7 @@ export const MSETool: React.FC = () => {
     lines.push('--------------------------------------------------------------------------------');
     lines.push('MEDİKOLEGAL & DİNAMİK FORMÜLASYON NOTU:');
     lines.push('Klinik izlenim, risk boyutu, karar verme yeterliği ve TMK/TCK ilgili maddeleri bağlamında değerlendirilmiştir.');
-    lines.push('Raporlayan Hekim / Servis: PSYCHDS Klinik & Akademik Karar Destek Sistemi');
+    lines.push('Raporlayan Hekim / Servis: PSYCHDS Klinik Psikiyatri Rehberi');
 
     return lines.join('\n');
   };
@@ -208,114 +208,61 @@ export const MSETool: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
       {/* Top Header Card */}
-      <div className="border border-neutral-800 bg-[#0d0d0d] p-5 sm:p-6 text-white relative overflow-hidden shadow-2xl flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div className="border border-neutral-200 bg-white p-5 sm:p-6 text-neutral-900 relative overflow-hidden shadow-2xl flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 rounded-xl">
+        <GeometricDiamondCornerOrnament className="absolute -top-4 -right-4 hidden sm:block" />
         <div>
-          <div className="flex items-center gap-2 text-red-500 font-semibold text-xs font-mono uppercase tracking-wider">
-            <ClipboardCheck className="w-4 h-4 text-red-500" />
+          <div className="flex items-center gap-2 text-neutral-900 font-semibold text-xs font-mono uppercase tracking-wider">
+            <span className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff]" />
+            <ClipboardCheck className="w-4 h-4 text-white" />
             <span>Master MSE & Deskriptif Psikopatoloji Atlası</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 mt-1 tracking-tight font-display">
             Ruhsal Durum Muayenesi (MSE)
           </h1>
-          <p className="text-sm text-neutral-400 mt-1 max-w-3xl leading-relaxed">
-            Yalnızca "oryante, koopere" yazılan bir alan değil; davranış, konuşma, duygulanım, düşünce, algı, biliş, içgörü ve yargılamayı aynı anda örnekleyen profesör düzeyinde yapılandırılmış inceleme aracı.
+          <p className="text-sm text-neutral-700 mt-1 max-w-3xl leading-relaxed">
+            Davranış, konuşma, duygulanım, düşünce, algı, biliş, içgörü ve yargılamayı örnekleyen yapılandırılmış klinik inceleme ve epikriz aracı.
           </p>
         </div>
 
         {/* 4-Step Anchor Badge */}
-        <div className="bg-black border border-neutral-800 p-3 rounded-none flex items-center gap-3 shrink-0">
-          <div className="text-right border-r border-neutral-800 pr-3 font-mono text-[11px]">
-            <span className="text-neutral-400 block">Ortak 4 Basamaklı</span>
-            <span className="text-red-400 font-bold">Klinik Çıpa</span>
+        <div className="bg-white border border-neutral-200 p-3 rounded-lg flex items-center gap-3 shrink-0">
+          <div className="text-right border-r border-neutral-200 pr-3 font-mono text-[11px]">
+            <span className="text-neutral-500 block">Ortak 4 Basamaklı</span>
+            <span className="text-neutral-900 font-bold">Klinik Çıpa</span>
           </div>
           <div className="flex items-center gap-1.5 font-mono text-xs">
-            <span className="px-1.5 py-0.5 bg-neutral-900 border border-neutral-700 text-neutral-300 font-bold" title="0: Korunmuş / Olağan">0</span>
-            <span className="px-1.5 py-0.5 bg-neutral-900 border border-neutral-700 text-neutral-400 font-bold" title="1: Hafif sapma / Kısmen sınırlı">1</span>
-            <span className="px-1.5 py-0.5 bg-red-950 border border-red-800 text-red-300 font-bold" title="2: Belirgin sapma / Açık bozulma">2</span>
-            <span className="px-1.5 py-0.5 bg-red-600 text-white font-bold" title="3: Ağır / Acil sapma">3</span>
+            <span className="px-1.5 py-0.5 bg-neutral-50 border border-neutral-200 text-neutral-500 font-bold" title="0: Korunmuş / Olağan">0</span>
+            <span className="px-1.5 py-0.5 bg-neutral-50 border border-neutral-300 text-neutral-700 font-bold" title="1: Hafif sapma / Kısmen sınırlı">1</span>
+            <span className="px-1.5 py-0.5 bg-neutral-800 border border-neutral-700 text-white font-bold" title="2: Belirgin sapma / Açık bozulma">2</span>
+            <span className="px-1.5 py-0.5 bg-black text-white font-bold shadow-xs" title="3: Ağır / Acil sapma">3</span>
           </div>
         </div>
       </div>
 
       {/* Navigation Sub-Tabs */}
-      <div className="flex flex-wrap gap-2 border-b border-neutral-800 pb-3">
-        <button
-          type="button"
-          onClick={() => setActiveTab('generator')}
-          className={`flex items-center gap-2 px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer border ${
-            activeTab === 'generator'
-              ? 'bg-red-600 border-red-500 text-white shadow-md'
-              : 'bg-[#121212] border-neutral-800 text-neutral-400 hover:text-white'
-          }`}
-        >
-          <FileText className="w-3.5 h-3.5" />
-          <span>İnteraktif Not Oluşturucu</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab('tension_points')}
-          className={`flex items-center gap-2 px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer border ${
-            activeTab === 'tension_points'
-              ? 'bg-red-600 border-red-500 text-white shadow-md'
-              : 'bg-[#121212] border-neutral-800 text-neutral-400 hover:text-white'
-          }`}
-        >
-          <GitCompare className="w-3.5 h-3.5" />
-          <span>İnce Ayırıcılar (Diagnostic Tension)</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab('red_flags')}
-          className={`flex items-center gap-2 px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer border ${
-            activeTab === 'red_flags'
-              ? 'bg-red-600 border-red-500 text-white shadow-md'
-              : 'bg-[#121212] border-neutral-800 text-neutral-400 hover:text-white'
-          }`}
-        >
-          <AlertTriangle className="w-3.5 h-3.5" />
-          <span>Kırmızı Bayraklar & Acil Akışlar</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab('medicolegal')}
-          className={`flex items-center gap-2 px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer border ${
-            activeTab === 'medicolegal'
-              ? 'bg-red-600 border-red-500 text-white shadow-md'
-              : 'bg-[#121212] border-neutral-800 text-neutral-400 hover:text-white'
-          }`}
-        >
-          <Scale className="w-3.5 h-3.5" />
-          <span>Türk Hukuku (TMK & TCK)</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab('case_examples')}
-          className={`flex items-center gap-2 px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer border ${
-            activeTab === 'case_examples'
-              ? 'bg-red-600 border-red-500 text-white shadow-md'
-              : 'bg-[#121212] border-neutral-800 text-neutral-400 hover:text-white'
-          }`}
-        >
-          <Layers className="w-3.5 h-3.5" />
-          <span>Örnek Olgular (Tam Formlar)</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab('glossary')}
-          className={`flex items-center gap-2 px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer border ${
-            activeTab === 'glossary'
-              ? 'bg-red-600 border-red-500 text-white shadow-md'
-              : 'bg-[#121212] border-neutral-800 text-neutral-400 hover:text-white'
-          }`}
-        >
-          <BookOpen className="w-3.5 h-3.5" />
-          <span>Semiyoloji Atlası & Sözlük</span>
-        </button>
+      <div className="flex flex-wrap gap-2 border-b border-neutral-200 pb-3">
+        {[
+          { id: 'generator', label: 'İnteraktif Not Oluşturucu', icon: <FileText className="w-3.5 h-3.5" /> },
+          { id: 'tension_points', label: 'İnce Ayırıcılar (Diagnostic Tension)', icon: <GitCompare className="w-3.5 h-3.5" /> },
+          { id: 'red_flags', label: 'Kritik Bayraklar & Acil Akışlar', icon: <AlertTriangle className="w-3.5 h-3.5" /> },
+          { id: 'medicolegal', label: 'Türk Hukuku (TMK & TCK)', icon: <Scale className="w-3.5 h-3.5" /> },
+          { id: 'case_examples', label: 'Örnek Olgular (Tam Formlar)', icon: <Layers className="w-3.5 h-3.5" /> },
+          { id: 'glossary', label: 'Semiyoloji Atlası & Sözlük', icon: <BookOpen className="w-3.5 h-3.5" /> }
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => setActiveTab(tab.id as any)}
+            className={`flex items-center gap-2 px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer border rounded-lg ${
+              activeTab === tab.id
+                ? 'bg-white border-white text-black shadow-md'
+                : 'bg-neutral-50 border-neutral-200 text-neutral-500 hover:text-neutral-900 hover:border-neutral-400'
+            }`}
+          >
+            {tab.icon}
+            <span>{tab.label}</span>
+          </button>
+        ))}
       </div>
 
       {/* TAB 1: GENERATOR */}
@@ -324,13 +271,13 @@ export const MSETool: React.FC = () => {
           {/* Left Column: Interactive Checkboxes */}
           <div className="lg:col-span-7 space-y-4">
             {/* Quick Profile Buttons */}
-            <div className="p-4 bg-[#0d0d0d] border border-neutral-800 space-y-3">
+            <div className="p-4 bg-white border border-neutral-200 space-y-3 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase text-neutral-400 font-bold">Hızlı Klinik Profiller:</span>
+                <span className="text-xs font-mono uppercase text-neutral-500 font-bold">Hızlı Klinik Profiller:</span>
                 <button
                   type="button"
                   onClick={handleClearAll}
-                  className="flex items-center gap-1 text-[11px] font-mono text-neutral-400 hover:text-red-400 transition-colors cursor-pointer"
+                  className="flex items-center gap-1 text-[11px] font-mono text-neutral-500 hover:text-neutral-900 transition-colors cursor-pointer"
                 >
                   <RotateCcw className="w-3 h-3" />
                   <span>Tümünü Sıfırla</span>
@@ -341,28 +288,28 @@ export const MSETool: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleSetNormalBaseline}
-                  className="px-2.5 py-2 text-xs font-bold text-white bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 transition-colors cursor-pointer text-center"
+                  className="px-2.5 py-2 text-xs font-semibold text-neutral-800 bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 transition-colors cursor-pointer text-center rounded-lg shadow-xs"
                 >
                   Ötimik / Normal
                 </button>
                 <button
                   type="button"
                   onClick={handleSetManiaProfile}
-                  className="px-2.5 py-2 text-xs font-bold text-red-200 bg-red-950/40 hover:bg-red-950/70 border border-red-800 transition-colors cursor-pointer text-center"
+                  className="px-2.5 py-2 text-xs font-semibold text-neutral-800 bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 transition-colors cursor-pointer text-center rounded-lg shadow-xs"
                 >
                   Akut Mani
                 </button>
                 <button
                   type="button"
                   onClick={handleSetDeliriumProfile}
-                  className="px-2.5 py-2 text-xs font-bold text-yellow-200 bg-yellow-950/30 hover:bg-yellow-950/60 border border-yellow-800 transition-colors cursor-pointer text-center"
+                  className="px-2.5 py-2 text-xs font-semibold text-neutral-800 bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 transition-colors cursor-pointer text-center rounded-lg shadow-xs"
                 >
                   Delirium
                 </button>
                 <button
                   type="button"
                   onClick={handleSetCatatoniaProfile}
-                  className="px-2.5 py-2 text-xs font-bold text-purple-200 bg-purple-950/30 hover:bg-purple-950/60 border border-purple-800 transition-colors cursor-pointer text-center"
+                  className="px-2.5 py-2 text-xs font-semibold text-neutral-800 bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 transition-colors cursor-pointer text-center rounded-lg shadow-xs"
                 >
                   Katatoni
                 </button>
@@ -374,16 +321,16 @@ export const MSETool: React.FC = () => {
               {MSE_DATA.map((group) => {
                 const groupSelected = selections[group.id] || [];
                 return (
-                  <div key={group.id} className="bg-[#0d0d0d] border border-neutral-800 shadow-sm p-4 space-y-3">
-                    <div className="flex items-start justify-between gap-2 border-b border-neutral-800 pb-2">
+                  <div key={group.id} className="bg-white border border-neutral-200 shadow-sm p-4 space-y-3 rounded-xl">
+                    <div className="flex items-start justify-between gap-2 border-b border-neutral-200 pb-2">
                       <div>
-                        <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-red-600 rounded-full" />
+                        <h3 className="font-bold text-sm text-neutral-900 flex items-center gap-2 font-display">
+                          <span className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
                           {group.title}
                         </h3>
-                        <p className="text-[11px] text-neutral-400 mt-0.5 leading-relaxed">{group.description}</p>
+                        <p className="text-[11px] text-neutral-500 mt-0.5 leading-relaxed">{group.description}</p>
                       </div>
-                      <span className="font-mono text-[10px] text-red-400 bg-neutral-900 border border-neutral-800 px-2 py-0.5 shrink-0">
+                      <span className="font-mono text-[10px] text-neutral-900 bg-neutral-100 border border-neutral-300 px-2 py-0.5 shrink-0 rounded-lg">
                         {groupSelected.length} seçildi
                       </span>
                     </div>
@@ -395,40 +342,40 @@ export const MSETool: React.FC = () => {
                           <div
                             key={idx}
                             onClick={() => toggleOption(group.id, option.term)}
-                            className={`p-2.5 border transition-all cursor-pointer flex items-start gap-3 select-none ${
+                            className={`p-2.5 border transition-all cursor-pointer flex items-start gap-3 select-none rounded-lg ${
                               isChecked
-                                ? 'bg-red-950/20 border-red-700 text-white'
-                                : 'bg-black/60 border-neutral-800/80 text-neutral-300 hover:border-neutral-700 hover:text-white'
+                                ? 'bg-neutral-100 border-neutral-900 text-neutral-900 shadow-xs'
+                                : 'bg-white border-neutral-200 text-neutral-700 hover:border-neutral-400 hover:text-neutral-900'
                             }`}
                           >
                             <button
                               type="button"
-                              className="mt-0.5 shrink-0 text-red-500"
+                              className="mt-0.5 shrink-0 text-neutral-800"
                             >
-                              {isChecked ? <CheckSquare className="w-4 h-4 text-red-500" /> : <Square className="w-4 h-4 text-neutral-600" />}
+                              {isChecked ? <CheckSquare className="w-4 h-4 text-neutral-900" /> : <Square className="w-4 h-4 text-neutral-400" />}
                             </button>
 
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between gap-2">
-                                <span className={`text-xs font-bold ${isChecked ? 'text-red-300' : 'text-neutral-200'}`}>
+                                <span className={`text-xs font-semibold ${isChecked ? 'text-neutral-900 font-bold' : 'text-neutral-800'}`}>
                                   {option.term}
                                 </span>
                                 {option.anchorScore !== undefined && (
-                                  <span className={`font-mono text-[10px] px-1.5 py-0.2 border ${
-                                    option.anchorScore === 3 ? 'bg-red-600 text-white border-red-500 font-bold' :
-                                    option.anchorScore === 2 ? 'bg-red-950 text-red-300 border-red-800' :
-                                    option.anchorScore === 1 ? 'bg-neutral-900 text-neutral-400 border-neutral-700' :
-                                    'bg-black text-neutral-400 border-neutral-800'
+                                  <span className={`font-mono text-[10px] px-1.5 py-0.2 border rounded-lg ${
+                                    option.anchorScore === 3 ? 'bg-black text-white border-black font-bold shadow-xs]' :
+                                    option.anchorScore === 2 ? 'bg-neutral-800 text-white border-neutral-600' :
+                                    option.anchorScore === 1 ? 'bg-neutral-100 text-neutral-800 border-neutral-300' :
+                                    'bg-neutral-50 text-neutral-600 border-neutral-200'
                                   }`}>
                                     Çıpa: {option.anchorScore}
                                   </span>
                                 )}
                               </div>
-                              <p className="text-[11px] text-neutral-400 mt-1 leading-relaxed">
+                              <p className="text-[11px] text-neutral-500 mt-1 leading-relaxed">
                                 {option.definition}
                               </p>
                               {option.sampleSentence && (
-                                <p className="text-[11px] text-neutral-300 font-mono italic mt-1.5 bg-neutral-950 p-1.5 border-l-2 border-red-600">
+                                <p className="text-[11px] text-neutral-700 font-mono italic mt-1.5 bg-white p-1.5 border-l-2 border-white rounded-lg">
                                   "{option.sampleSentence}"
                                 </p>
                               )}
@@ -445,20 +392,20 @@ export const MSETool: React.FC = () => {
 
           {/* Right Column: Real-time Live Generated Professional Note */}
           <div className="lg:col-span-5 sticky top-20 space-y-4">
-            <div className="p-4 bg-[#0d0d0d] border border-neutral-800 shadow-2xl space-y-3">
-              <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
+            <div className="p-4 bg-white border border-neutral-200 shadow-2xl space-y-3 rounded-xl">
+              <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
                 <div className="flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-red-500" />
-                  <h3 className="font-bold text-sm text-white font-mono uppercase">
+                  <FileText className="w-4 h-4 text-neutral-800" />
+                  <h3 className="font-bold text-sm text-neutral-900 font-mono uppercase">
                     Canlı Epikriz Metni
                   </h3>
                 </div>
                 <button
                   type="button"
                   onClick={handleCopyNote}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-red-600 hover:bg-red-700 transition-colors cursor-pointer shadow-sm"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-black bg-white hover:bg-neutral-200 transition-colors cursor-pointer shadow-sm rounded-lg"
                 >
-                  {copied ? <Check className="w-3.5 h-3.5 text-white" /> : <Copy className="w-3.5 h-3.5 text-white" />}
+                  {copied ? <Check className="w-3.5 h-3.5 text-black" /> : <Copy className="w-3.5 h-3.5 text-black" />}
                   <span>{copied ? 'Kopyalandı!' : 'Metni Kopyala'}</span>
                 </button>
               </div>
@@ -467,11 +414,11 @@ export const MSETool: React.FC = () => {
                 readOnly
                 value={generateFormattedNote()}
                 rows={22}
-                className="w-full bg-black border border-neutral-800 p-3.5 font-mono text-[11px] text-neutral-200 leading-relaxed focus:outline-none resize-none selection:bg-red-900 selection:text-white"
+                className="w-full bg-white border border-neutral-200 p-3.5 font-mono text-[11px] text-neutral-800 leading-relaxed focus:outline-none resize-none selection:bg-white selection:text-black rounded-lg"
               />
 
-              <div className="p-3 bg-neutral-950 border border-neutral-800 text-[11px] text-neutral-400 space-y-1">
-                <span className="font-bold text-neutral-200 block">Klinik Not Yazım İlkesi:</span>
+              <div className="p-3 bg-neutral-50 border border-neutral-200 text-[11px] text-neutral-500 space-y-1 rounded-lg">
+                <span className="font-bold text-neutral-900 block">Klinik Not Yazım İlkesi:</span>
                 <p className="leading-relaxed">
                   İyi bir MSE notunda terimler yalnızca adlandırılmaz; fenomen operasyonelleştirilir. "Affekt uygunsuz" yerine neye göre uygunsuz olduğu; "içgörü yok" yerine hangi boyutta farkındalığın bozulduğu yazılmalıdır.
                 </p>
@@ -481,36 +428,35 @@ export const MSETool: React.FC = () => {
         </div>
       )}
 
-      {/* TAB 2: DIAGNOSTIC TENSION POINTS & DOCUMENTATION ERRORS */}
+      {/* TAB 2: DIAGNOSTIC TENSION POINTS */}
       {activeTab === 'tension_points' && (
         <div className="space-y-6">
-          {/* Documentation Errors Comparison Table */}
-          <div className="p-5 bg-[#0d0d0d] border border-neutral-800 space-y-3">
-            <div className="flex items-center gap-2 text-red-500">
-              <ShieldAlert className="w-5 h-5 text-red-500" />
-              <h3 className="font-bold text-base text-white">
+          <div className="p-5 bg-white border border-neutral-200 space-y-3 rounded-xl">
+            <div className="flex items-center gap-2 text-neutral-900">
+              <ShieldAlert className="w-5 h-5 text-neutral-800" />
+              <h3 className="font-bold text-base text-neutral-900 font-display">
                 Sık Yapılan Belgeleme Hataları vs. Profesör Düzeyi Yazım
               </h3>
             </div>
-            <p className="text-xs text-neutral-400 leading-relaxed">
+            <p className="text-xs text-neutral-500 leading-relaxed">
               Türk klinik ve adli pratiğinde en sık karşılaşılan belgeleme yetersizlikleri ve bunları standart, savunulabilir hale getiren doğru yazım kalıpları.
             </p>
 
-            <div className="overflow-x-auto border border-neutral-800 mt-3">
-              <table className="min-w-full text-xs text-left divide-y divide-neutral-800 font-sans">
-                <thead className="bg-[#141414] text-neutral-300 font-mono font-bold uppercase text-[11px]">
+            <div className="overflow-x-auto border border-neutral-200 mt-3 rounded-lg">
+              <table className="min-w-full text-xs text-left divide-y divide-neutral-200 font-sans">
+                <thead className="bg-neutral-50 text-neutral-700 font-mono font-bold uppercase text-[11px]">
                   <tr>
-                    <th className="px-4 py-3 w-1/4 text-red-400">Sık Hata (Yetersiz)</th>
-                    <th className="px-4 py-3 w-1/3 text-neutral-400">Neden Sorun?</th>
-                    <th className="px-4 py-3 text-white">Daha İyi Profesör Yazımı (Örnek)</th>
+                    <th className="px-4 py-3 w-1/4 text-neutral-900">Sık Hata (Yetersiz)</th>
+                    <th className="px-4 py-3 w-1/3 text-neutral-500">Neden Sorun?</th>
+                    <th className="px-4 py-3 text-neutral-900">Daha İyi Profesör Yazımı (Örnek)</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-800 text-neutral-300">
+                <tbody className="divide-y divide-neutral-200 text-neutral-700">
                   {MSE_DOCUMENTATION_ERRORS_DATA.map((err, idx) => (
-                    <tr key={idx} className="hover:bg-neutral-900/40">
-                      <td className="px-4 py-3 font-mono font-bold text-red-300 bg-red-950/10">{err.commonError}</td>
-                      <td className="px-4 py-3 text-neutral-400 leading-relaxed">{err.whyProblematic}</td>
-                      <td className="px-4 py-3 text-white font-medium bg-neutral-950 font-mono text-[11px] leading-relaxed">
+                    <tr key={idx} className="hover:bg-neutral-50">
+                      <td className="px-4 py-3 font-mono font-bold text-neutral-900 bg-white">{err.commonError}</td>
+                      <td className="px-4 py-3 text-neutral-500 leading-relaxed">{err.whyProblematic}</td>
+                      <td className="px-4 py-3 text-neutral-900 font-medium bg-white font-mono text-[11px] leading-relaxed">
                         {err.betterPractice}
                       </td>
                     </tr>
@@ -520,50 +466,44 @@ export const MSETool: React.FC = () => {
             </div>
           </div>
 
-          {/* Diagnostic Tension Points Matrix */}
-          <div className="p-5 bg-[#0d0d0d] border border-neutral-800 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-neutral-800 pb-3">
-              <div>
-                <div className="flex items-center gap-2">
-                  <GitCompare className="w-5 h-5 text-red-500" />
-                  <h3 className="font-bold text-base text-white">
-                    Diagnostic Tension Points - MSE Üzerinden İnce Ayırıcılar
-                  </h3>
-                </div>
-                <p className="text-xs text-neutral-400 mt-1">
-                  Aynı veya benzer görünen fenomenlerin altında yatan farklı mekanizmaları ayırmak için pratik kılavuz (30+ İkili Ayrım).
-                </p>
+          {/* Diagnostic Tension Points Filter List */}
+          <div className="p-5 bg-white border border-neutral-200 space-y-4 rounded-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-neutral-900">
+                <GitCompare className="w-5 h-5 text-neutral-800" />
+                <h3 className="font-bold text-base text-neutral-900 font-display">
+                  Tanısal Gerilim Noktaları (Diagnostic Tension Points)
+                </h3>
               </div>
-
-              <div className="relative w-full sm:w-64">
-                <Search className="w-4 h-4 text-neutral-500 absolute left-3 top-2.5" />
+              <div className="relative w-full sm:w-72">
+                <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
-                  placeholder="İkili ayrım ara (örn. obsesyon, akoazm)..."
+                  placeholder="Gerilim konusu ara..."
                   value={tensionSearch}
                   onChange={(e) => setTensionSearch(e.target.value)}
-                  className="w-full pl-9 pr-3 py-1.5 text-xs bg-black border border-neutral-800 text-white placeholder-neutral-500 focus:outline-none focus:border-red-600"
+                  className="w-full pl-9 pr-3 py-1.5 text-xs bg-white border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-neutral-900 rounded-lg"
                 />
               </div>
             </div>
 
-            <div className="overflow-x-auto border border-neutral-800">
+            <div className="overflow-x-auto border border-neutral-200 rounded-lg">
               <table className="min-w-full text-xs text-left divide-y divide-neutral-800">
-                <thead className="bg-[#141414] text-neutral-300 font-mono font-bold uppercase text-[11px]">
+                <thead className="bg-neutral-50 text-neutral-700 font-mono font-bold uppercase text-[11px]">
                   <tr>
-                    <th className="px-4 py-3 w-1/4">Gerilim Noktası</th>
-                    <th className="px-4 py-3 w-1/4 text-neutral-200">Birinci Örüntü</th>
-                    <th className="px-4 py-3 w-1/4 text-neutral-200">İkinci Örüntü</th>
-                    <th className="px-4 py-3 text-red-400 font-bold">MSE'de Yüksek Getirili Ayrım</th>
+                    <th className="px-4 py-3">Klinik İkilem</th>
+                    <th className="px-4 py-3">Örüntü A</th>
+                    <th className="px-4 py-3">Örüntü B</th>
+                    <th className="px-4 py-3 text-neutral-900 font-bold">MSE'de Yüksek Getirili Ayrım</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-800 text-neutral-300">
+                <tbody className="divide-y divide-neutral-800 text-neutral-700">
                   {filteredTensionPoints.map((tp, idx) => (
-                    <tr key={idx} className="hover:bg-neutral-900/40">
-                      <td className="px-4 py-3 font-bold text-white bg-black/40">{tp.issue}</td>
-                      <td className="px-4 py-3 text-neutral-300 leading-relaxed">{tp.patternA}</td>
-                      <td className="px-4 py-3 text-neutral-300 leading-relaxed bg-neutral-950">{tp.patternB}</td>
-                      <td className="px-4 py-3 text-red-200 font-medium bg-red-950/20 leading-relaxed">{tp.highYieldDistinction}</td>
+                    <tr key={idx} className="hover:bg-neutral-100/60">
+                      <td className="px-4 py-3 font-bold text-neutral-900 font-display">{tp.issue}</td>
+                      <td className="px-4 py-3 text-neutral-500">{tp.patternA}</td>
+                      <td className="px-4 py-3 text-neutral-500">{tp.patternB}</td>
+                      <td className="px-4 py-3 text-neutral-900 font-medium bg-white leading-relaxed">{tp.highYieldDistinction}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -573,126 +513,77 @@ export const MSETool: React.FC = () => {
         </div>
       )}
 
-      {/* TAB 3: RED FLAGS & ACUTE FLOWS */}
+      {/* TAB 3: RED FLAGS & ACUTE WORKFLOWS */}
       {activeTab === 'red_flags' && (
         <div className="space-y-6">
-          <div className="p-4 bg-red-950/30 border border-red-800/80 text-xs sm:text-sm text-red-200 flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+          <div className="p-4 bg-white border border-neutral-300 text-xs sm:text-sm text-neutral-800 rounded-lg flex items-start gap-3">
+            <AlertTriangle className="w-5 h-5 text-neutral-800 shrink-0 mt-0.5" />
             <div>
-              <h4 className="font-bold text-white text-sm">Kırmızı Bayraklar ve Acil Müdahale Protokolü</h4>
-              <p className="text-xs text-neutral-300 mt-1 leading-relaxed">
-                Ruhsal durum muayenesinde tespit edilen akut dikkat fluktuasyonu, mutizm, stupor, yüksek öldürücülükte intihar planı veya fokal nörolojik bulgular rutin poliklinik akışını durduran ve anında acil işlem gerektiren durumlardır.
+              <h4 className="font-bold text-neutral-900 font-display">Acil Kırmızı Bayraklar ve Eylemler</h4>
+              <p className="text-xs text-neutral-500 mt-1 leading-relaxed">
+                Ruhsal durum muayenesinde aşağıdaki bulgular saptandığında rutin poliklinik akışı durdurulmalı; acil organik dışlama veya güvenlik protokolü devreye sokulmalıdır.
               </p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {MSE_RED_FLAGS_DATA.map((rf, idx) => (
-              <div key={idx} className="p-5 bg-[#0d0d0d] border border-neutral-800 space-y-3 shadow-md">
-                <div className="flex items-center justify-between gap-2 border-b border-neutral-800 pb-2">
-                  <span className="font-mono text-[11px] font-bold text-red-500 uppercase tracking-wider">
-                    ÖN OLASI: {rf.suspectedSyndrome}
+              <div key={idx} className="p-5 bg-white border border-neutral-200 space-y-3 rounded-xl">
+                <div className="flex items-center justify-between border-b border-neutral-200 pb-2">
+                  <span className="font-mono text-[11px] font-bold text-neutral-900 uppercase tracking-wider">
+                    {rf.title}
                   </span>
-                  <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
+                  <span className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_6px_#ffffff]" />
                 </div>
-
-                <h3 className="font-bold text-sm text-white leading-snug">
-                  {rf.title}
-                </h3>
-
-                <div className="p-3 bg-black border border-neutral-800/80 space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-neutral-400 font-bold block">
-                    Anında Yapılacaklar:
-                  </span>
-                  <p className="text-xs text-neutral-200 leading-relaxed">
-                    {rf.immediateAction}
-                  </p>
+                <div className="text-xs space-y-2">
+                  <div>
+                    <strong className="text-neutral-500 block mb-0.5 font-mono text-[10px] uppercase">Şüphelenilecek Durum / Risk:</strong>
+                    <p className="text-neutral-700 font-bold">{rf.suspectedSyndrome}</p>
+                  </div>
+                  <div>
+                    <strong className="text-neutral-900 block mb-0.5 font-mono text-[10px] uppercase">Acil Müdahale Adımı:</strong>
+                    <p className="text-neutral-800 font-medium bg-neutral-50 p-2.5 border border-neutral-300 rounded-lg">
+                      {rf.immediateAction}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-
-          {/* Quick Flowcharts for Delirium and Catatonia */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-            {/* Delirium Flowchart */}
-            <div className="p-5 bg-[#0d0d0d] border border-neutral-800 space-y-3">
-              <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                <HeartPulse className="w-4 h-4 text-red-500" />
-                Delirium Hızlı Değerlendirme Algoritması (CAM & 4AT)
-              </h3>
-              <div className="bg-black p-4 border border-neutral-800 text-xs font-mono space-y-2 text-neutral-300">
-                <div className="text-red-400 font-bold">1. Akut zihinsel durum değişikliği var mı?</div>
-                <div className="pl-3 border-l-2 border-neutral-700">➔ Gün içi dalgalanma (fluktuasyon) var mı? (Evet/Hayır)</div>
-                <div className="text-red-400 font-bold">2. Dikkat bozuk mu? (Inattention)</div>
-                <div className="pl-3 border-l-2 border-neutral-700">➔ Ayları tersten sayma veya 4AT testi uygula.</div>
-                <div className="text-white bg-neutral-900 p-2 border border-neutral-800 font-bold">
-                  4AT Skoru ≥ 4 veya CAM Pozitif ise: DELIRIUM OLASI!
-                </div>
-                <div className="text-[11px] text-neutral-400 pt-1">
-                  İşlem: Vital bulgular, parmak ucu glukoz, SpO2, ilaç listesi (antikolinerjik yük), enfeksiyon/metabolik neden araştırması.
-                </div>
-              </div>
-            </div>
-
-            {/* Catatonia Flowchart */}
-            <div className="p-5 bg-[#0d0d0d] border border-neutral-800 space-y-3">
-              <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                <AlertTriangle className="w-4 h-4 text-red-500" />
-                Katatoni Hızlı Değerlendirme Algoritması (BFCRS)
-              </h3>
-              <div className="bg-black p-4 border border-neutral-800 text-xs font-mono space-y-2 text-neutral-300">
-                <div className="text-red-400 font-bold">1. Çekirdek bulgular: Mutizm, Staring, Posturing, Negativizm</div>
-                <div className="pl-3 border-l-2 border-neutral-700">➔ Bush-Francis Catatonia Rating Scale (BFCRS) ilk 14 maddede ≥ 2 bulgu var mı?</div>
-                <div className="text-red-400 font-bold">2. Ateş / Otonom instabilite / Rijidite / CK artışı var mı?</div>
-                <div className="pl-3 border-l-2 border-red-800 text-red-300">➔ EVET ise: Malign Katatoni veya NMS ACİLİ!</div>
-                <div className="pl-3 border-l-2 border-neutral-700 text-neutral-400">➔ HAYIR ise: Lorazepam challenge testi (1-2 mg IV/SL) ve hızlı uzman değerlendirmesi.</div>
-                <div className="text-[11px] text-neutral-400 pt-1">
-                  İşlem: Oral beslenme kesilmesi durumunda acil hidrasyon, DVT profilaksisi ve erken EKT hazırlığı.
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       )}
 
-      {/* TAB 4: TURKISH MEDICOLEGAL & CAPACITY */}
+      {/* TAB 4: TURKISH MEDICOLEGAL FRAMEWORK */}
       {activeTab === 'medicolegal' && (
         <div className="space-y-6">
-          <div className="p-4 bg-neutral-900/60 border border-neutral-800 text-xs sm:text-sm text-neutral-200">
-            <h4 className="font-bold text-white text-sm">Türk Medeni Kanunu (TMK) ve Ceza Kanunu (TCK) Çerçevesi</h4>
-            <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
-              MSE notu tıbbi olduğu kadar adli ve medikolegal bir belgedir. Hekim kesin hukuki hüküm dili ("kısıtlanmalıdır") yerine, klinik olguları ve karar verme kapasitesindeki etkilenmeyi objektif dille belgelendirmelidir.
+          <div className="p-4 bg-white border border-neutral-300 text-xs sm:text-sm text-neutral-800 rounded-lg">
+            <h4 className="font-bold text-neutral-900 font-display">Türk Medeni Kanunu (TMK) ve Türk Ceza Kanunu (TCK) Bağlamında MSE</h4>
+            <p className="text-xs text-neutral-500 mt-1 leading-relaxed">
+              Mahkemeler ve adli merciler önünde hekimin düzenlediği MSE notu, vesayet, kısıtlama, hukuki ehliyet ve cezai sorumluluk değerlendirmesinde temel delildir.
             </p>
           </div>
 
           <div className="space-y-4">
-            {TURKISH_MEDICOLEGAL_DATA.map((item, idx) => (
-              <div key={idx} className="p-4 sm:p-5 bg-[#0d0d0d] border border-neutral-800 space-y-3 shadow-md">
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-800 pb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono font-bold text-sm text-red-500 bg-black px-2.5 py-1 border border-neutral-800">
-                      {item.norm}
-                    </span>
-                    <span className="font-bold text-sm text-white">{item.situation}</span>
-                  </div>
+            {TURKISH_MEDICOLEGAL_DATA.map((ml, idx) => (
+              <div key={idx} className="p-5 bg-white border border-neutral-200 space-y-3 rounded-xl">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-neutral-200 pb-2 gap-1">
+                  <span className="font-mono font-bold text-sm text-neutral-900 bg-neutral-50 px-2.5 py-1 border border-neutral-300 rounded-lg">
+                    {ml.norm}
+                  </span>
+                  <span className="text-xs text-neutral-500">Yasal Norm & Kapsam</span>
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                  <div className="bg-black p-3 border border-neutral-800/80 space-y-1">
-                    <span className="font-mono font-bold text-[10px] text-neutral-400 uppercase block">
-                      MSE'de Özellikle Belgelenecekler:
-                    </span>
-                    <p className="text-neutral-300 leading-relaxed">{item.mseDocumentation}</p>
-                  </div>
-
-                  <div className="bg-red-950/15 p-3 border border-red-900/50 space-y-1">
-                    <span className="font-mono font-bold text-[10px] text-red-400 uppercase block">
-                      Önerilen Resmî Rapor Dili:
-                    </span>
-                    <p className="text-white font-mono text-[11px] leading-relaxed italic">
-                      "{item.recommendedReportLanguage}"
-                    </p>
-                  </div>
+                <p className="text-xs text-neutral-700 leading-relaxed">{ml.situation}</p>
+                <div className="bg-white p-3 border border-neutral-200 space-y-1 rounded-lg">
+                  <span className="font-mono font-bold text-[10px] text-neutral-900 uppercase block">
+                    Kritik Belgeleme Kuralı:
+                  </span>
+                  <p className="text-neutral-700 font-mono text-[11px] leading-relaxed">
+                    {ml.mseDocumentation}
+                  </p>
+                </div>
+                <div className="bg-neutral-50 p-2.5 border border-neutral-300 rounded-lg">
+                  <span className="font-mono font-bold text-[10px] text-neutral-700 uppercase block mb-0.5">Önerilen Rapor Dili:</span>
+                  <p className="text-xs text-neutral-800 italic">{ml.recommendedReportLanguage}</p>
                 </div>
               </div>
             ))}
@@ -703,50 +594,34 @@ export const MSETool: React.FC = () => {
       {/* TAB 5: CASE EXAMPLES */}
       {activeTab === 'case_examples' && (
         <div className="space-y-6">
-          <div className="p-4 bg-[#0d0d0d] border border-neutral-800 text-xs sm:text-sm text-neutral-300">
-            <h4 className="font-bold text-white text-sm">Eğitim ve Klinik Başvuru: Tam Doldurulmuş MSE Olguları</h4>
-            <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
-              Farklı klinik tablolarda (Mani, Delirium, Katatoni) profesör düzeyinde belgelenmiş vaka vinyetleri, tam MSE formları ve klinik izlenimler.
-            </p>
-          </div>
-
-          <div className="space-y-6">
+          <div className="space-y-4">
             {MSE_CASE_EXAMPLES_DATA.map((c) => (
-              <div key={c.id} className="p-5 bg-[#0d0d0d] border border-neutral-800 shadow-xl space-y-4">
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-800 pb-3">
+              <div key={c.id} className="p-5 bg-white border border-neutral-200 space-y-4 rounded-xl shadow-xl">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-neutral-200 pb-3 gap-2">
                   <div>
-                    <h3 className="font-bold text-base text-white">{c.title}</h3>
-                    <p className="text-xs text-neutral-400 mt-0.5 italic">{c.vignette}</p>
+                    <span className="text-[10px] font-mono font-bold uppercase text-neutral-500">{c.clinicalImpression}</span>
+                    <h4 className="text-base font-bold text-neutral-900 font-display">{c.title}</h4>
+                    <p className="text-xs text-neutral-500 mt-0.5">{c.vignette}</p>
                   </div>
                   <button
                     type="button"
                     onClick={() => handleCopyCase(c.id, c.fullMSE)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-red-600 hover:bg-red-700 transition-colors cursor-pointer shrink-0"
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-black bg-white hover:bg-neutral-200 transition-colors cursor-pointer rounded-lg self-start sm:self-auto shrink-0"
                   >
-                    {copiedCaseId === c.id ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copiedCaseId === c.id ? 'Kopyalandı!' : 'Tam MSE\'yi Kopyala'}</span>
+                    {copiedCaseId === c.id ? <Check className="w-3.5 h-3.5 text-black" /> : <Copy className="w-3.5 h-3.5 text-black" />}
+                    <span>{copiedCaseId === c.id ? 'Kopyalandı' : 'Örnek Notu Kopyala'}</span>
                   </button>
                 </div>
 
-                <div className="bg-black p-4 border border-neutral-800 font-mono text-xs text-neutral-200 whitespace-pre-wrap leading-relaxed">
+                <div className="bg-white p-4 border border-neutral-200 rounded-lg font-mono text-xs text-neutral-700 whitespace-pre-wrap leading-relaxed">
                   {c.fullMSE}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                  <div className="bg-[#141414] p-3 border border-neutral-800">
-                    <span className="font-mono font-bold text-[10px] text-neutral-400 uppercase block mb-1">
-                      Klinik İzlenim:
-                    </span>
-                    <p className="text-neutral-200">{c.clinicalImpression}</p>
-                  </div>
-                  {c.acuteAction && (
-                    <div className="bg-red-950/20 p-3 border border-red-800/60">
-                      <span className="font-mono font-bold text-[10px] text-red-400 uppercase block mb-1">
-                        Akut Eylem:
-                      </span>
-                      <p className="text-white">{c.acuteAction}</p>
-                    </div>
-                  )}
+                <div className="bg-neutral-50 p-3 border border-neutral-300 rounded-lg">
+                  <span className="font-mono font-bold text-[10px] text-neutral-900 uppercase block mb-1">
+                    Akut Klinik Eylem & Yönetim:
+                  </span>
+                  <p className="text-neutral-800 text-xs leading-relaxed">{c.acuteAction}</p>
                 </div>
               </div>
             ))}
@@ -754,61 +629,50 @@ export const MSETool: React.FC = () => {
         </div>
       )}
 
-      {/* TAB 6: SEMIYOLOJI ATLASI & SÖZLÜK */}
+      {/* TAB 6: GLOSSARY */}
       {activeTab === 'glossary' && (
-        <div className="p-5 bg-[#0d0d0d] border border-neutral-800 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-neutral-800 pb-4">
+        <div className="space-y-4">
+          <div className="p-4 bg-white border border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-3 rounded-lg">
             <div>
-              <h2 className="text-lg font-bold text-white">
-                Deskriptif Psikopatoloji & Semiyoloji Sözlüğü
-              </h2>
-              <p className="text-xs text-neutral-400 mt-1">
-                Klinik terimlerin operasyonel tanımları, ayırıcı tanı bağlamları ve doğrudan kopyalanabilir profesör not cümleleri.
-              </p>
+              <h4 className="font-bold text-sm text-neutral-900 font-display">Deskriptif Psikopatoloji Sözlüğü</h4>
+              <p className="text-xs text-neutral-500">Tüm MSE terimleri ve klinik karşılıkları</p>
             </div>
-
-            <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 text-neutral-500 absolute left-3 top-2.5" />
+            <div className="relative w-full sm:w-80">
+              <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Terim veya tanım ara..."
                 value={glossarySearch}
                 onChange={(e) => setGlossarySearch(e.target.value)}
-                className="w-full pl-9 pr-3 py-1.5 text-xs bg-black border border-neutral-800 text-white placeholder-neutral-500 focus:outline-none focus:border-red-600"
+                className="w-full pl-9 pr-3 py-1.5 text-xs bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-neutral-900 rounded-lg"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {allGlossaryTerms.map((item, idx) => (
-              <div key={idx} className="p-4 bg-black border border-neutral-800 hover:border-neutral-700 transition-colors space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <h4 className="font-bold text-xs text-white flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 bg-red-600 rounded-full" />
-                    {item.term}
-                  </h4>
+              <div key={idx} className="p-4 bg-white border border-neutral-200 hover:border-neutral-400 transition-colors space-y-2 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <h5 className="font-bold text-sm text-neutral-900 font-display flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
+                    <span>{item.term}</span>
+                  </h5>
                   {item.anchorScore !== undefined && (
-                    <span className={`font-mono text-[10px] px-1.5 py-0.2 border ${
-                      item.anchorScore === 3 ? 'bg-red-600 text-white border-red-500 font-bold' :
-                      item.anchorScore === 2 ? 'bg-red-950 text-red-300 border-red-800' :
-                      item.anchorScore === 1 ? 'bg-neutral-900 text-neutral-400 border-neutral-700' :
-                      'bg-black text-neutral-400 border-neutral-800'
+                    <span className={`font-mono text-[10px] px-1.5 py-0.2 border rounded-lg ${
+                      item.anchorScore === 3 ? 'bg-black text-white border-black font-bold' :
+                      item.anchorScore === 2 ? 'bg-neutral-800 text-white border-neutral-600' :
+                      'bg-neutral-100 text-neutral-700 border-neutral-200'
                     }`}>
                       Çıpa: {item.anchorScore}
                     </span>
                   )}
                 </div>
-
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  {item.definition}
-                </p>
-
+                <p className="text-xs text-neutral-700 leading-relaxed">{item.definition}</p>
                 {item.sampleSentence && (
-                  <div className="bg-[#121212] p-2 border-l-2 border-red-600 text-[11px] font-mono text-neutral-300">
+                  <div className="bg-neutral-50 p-2.5 border-l-2 border-neutral-800 text-[11px] font-mono text-neutral-800 rounded-r-lg">
                     "{item.sampleSentence}"
                   </div>
                 )}
-
                 <div className="pt-1 text-[10px] font-mono text-neutral-500">
                   Kategori: {item.categoryTitle}
                 </div>
